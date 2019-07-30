@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chadianmeiyou.haihuanguser.mapper.HhUserMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="pass_word" property="passWord" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="empirical_value" property="empiricalValue" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="ranks" property="ranks" jdbcType="VARCHAR" />
+    <result column="article_energy" property="articleEnergy" jdbcType="VARCHAR" />
+    <result column="belong_to_the_sea" property="belongToTheSea" jdbcType="VARCHAR" />
+    <result column="online" property="online" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="login_method" property="loginMethod" jdbcType="VARCHAR" />
+    <result column="hh_id" property="hhId" jdbcType="VARCHAR" />
+    <result column="limits" property="limits" jdbcType="BIGINT" />
+    <result column="idiograph" property="idiograph" jdbcType="VARCHAR" />
+    <result column="background_image" property="backgroundImage" jdbcType="VARCHAR" />
+    <result column="gift_id" property="giftId" jdbcType="BIGINT" />
+    <result column="interpersonal_id" property="interpersonalId" jdbcType="BIGINT" />
+    <result column="room_id" property="roomId" jdbcType="BIGINT" />
+    <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
+    <result column="money_id" property="moneyId" jdbcType="BIGINT" />
+    <result column="balance_money" property="balanceMoney" jdbcType="DOUBLE" />
+    <result column="head_photo" property="headPhoto" jdbcType="VARCHAR" />
+    <result column="third_party_account" property="thirdPartyAccount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, real_name, nick_name, mobile_phone, pass_word, id_card, age, area, sex, empirical_value, 
+    grade, ranks, article_energy, belong_to_the_sea, online, money, login_method, hh_id, 
+    limits, idiograph, background_image, gift_id, interpersonal_id, room_id, dynamic_id, 
+    money_id, balance_money, head_photo, third_party_account
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hh_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhUserExample" >
+    delete from hh_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhUser" >
+    insert into hh_user (id, real_name, nick_name, 
+      mobile_phone, pass_word, id_card, 
+      age, area, sex, empirical_value, 
+      grade, ranks, article_energy, 
+      belong_to_the_sea, online, money, 
+      login_method, hh_id, limits, 
+      idiograph, background_image, gift_id, 
+      interpersonal_id, room_id, dynamic_id, 
+      money_id, balance_money, head_photo, 
+      third_party_account)
+    values (#{id,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{empiricalValue,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{ranks,jdbcType=VARCHAR}, #{articleEnergy,jdbcType=VARCHAR}, 
+      #{belongToTheSea,jdbcType=VARCHAR}, #{online,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, 
+      #{loginMethod,jdbcType=VARCHAR}, #{hhId,jdbcType=VARCHAR}, #{limits,jdbcType=BIGINT}, 
+      #{idiograph,jdbcType=VARCHAR}, #{backgroundImage,jdbcType=VARCHAR}, #{giftId,jdbcType=BIGINT}, 
+      #{interpersonalId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, 
+      #{moneyId,jdbcType=BIGINT}, #{balanceMoney,jdbcType=DOUBLE}, #{headPhoto,jdbcType=VARCHAR}, 
+      #{thirdPartyAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhUser" >
+    insert into hh_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone,
+      </if>
+      <if test="passWord != null" >
+        pass_word,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="empiricalValue != null" >
+        empirical_value,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="ranks != null" >
+        ranks,
+      </if>
+      <if test="articleEnergy != null" >
+        article_energy,
+      </if>
+      <if test="belongToTheSea != null" >
+        belong_to_the_sea,
+      </if>
+      <if test="online != null" >
+        online,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="loginMethod != null" >
+        login_method,
+      </if>
+      <if test="hhId != null" >
+        hh_id,
+      </if>
+      <if test="limits != null" >
+        limits,
+      </if>
+      <if test="idiograph != null" >
+        idiograph,
+      </if>
+      <if test="backgroundImage != null" >
+        background_image,
+      </if>
+      <if test="giftId != null" >
+        gift_id,
+      </if>
+      <if test="interpersonalId != null" >
+        interpersonal_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="dynamicId != null" >
+        dynamic_id,
+      </if>
+      <if test="moneyId != null" >
+        money_id,
+      </if>
+      <if test="balanceMoney != null" >
+        balance_money,
+      </if>
+      <if test="headPhoto != null" >
+        head_photo,
+      </if>
+      <if test="thirdPartyAccount != null" >
+        third_party_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="empiricalValue != null" >
+        #{empiricalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="ranks != null" >
+        #{ranks,jdbcType=VARCHAR},
+      </if>
+      <if test="articleEnergy != null" >
+        #{articleEnergy,jdbcType=VARCHAR},
+      </if>
+      <if test="belongToTheSea != null" >
+        #{belongToTheSea,jdbcType=VARCHAR},
+      </if>
+      <if test="online != null" >
+        #{online,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="loginMethod != null" >
+        #{loginMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="hhId != null" >
+        #{hhId,jdbcType=VARCHAR},
+      </if>
+      <if test="limits != null" >
+        #{limits,jdbcType=BIGINT},
+      </if>
+      <if test="idiograph != null" >
+        #{idiograph,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImage != null" >
+        #{backgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="giftId != null" >
+        #{giftId,jdbcType=BIGINT},
+      </if>
+      <if test="interpersonalId != null" >
+        #{interpersonalId,jdbcType=BIGINT},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="dynamicId != null" >
+        #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="moneyId != null" >
+        #{moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="balanceMoney != null" >
+        #{balanceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="headPhoto != null" >
+        #{headPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPartyAccount != null" >
+        #{thirdPartyAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhUserExample" resultType="java.lang.Integer" >
+    select count(*) from hh_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilePhone != null" >
+        mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passWord != null" >
+        pass_word = #{record.passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empiricalValue != null" >
+        empirical_value = #{record.empiricalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ranks != null" >
+        ranks = #{record.ranks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleEnergy != null" >
+        article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongToTheSea != null" >
+        belong_to_the_sea = #{record.belongToTheSea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.online != null" >
+        online = #{record.online,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DOUBLE},
+      </if>
+      <if test="record.loginMethod != null" >
+        login_method = #{record.loginMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hhId != null" >
+        hh_id = #{record.hhId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limits != null" >
+        limits = #{record.limits,jdbcType=BIGINT},
+      </if>
+      <if test="record.idiograph != null" >
+        idiograph = #{record.idiograph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundImage != null" >
+        background_image = #{record.backgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftId != null" >
+        gift_id = #{record.giftId,jdbcType=BIGINT},
+      </if>
+      <if test="record.interpersonalId != null" >
+        interpersonal_id = #{record.interpersonalId,jdbcType=BIGINT},
+      </if>
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dynamicId != null" >
+        dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.moneyId != null" >
+        money_id = #{record.moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.balanceMoney != null" >
+        balance_money = #{record.balanceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.headPhoto != null" >
+        head_photo = #{record.headPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdPartyAccount != null" >
+        third_party_account = #{record.thirdPartyAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_user
+    set id = #{record.id,jdbcType=BIGINT},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      pass_word = #{record.passWord,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      empirical_value = #{record.empiricalValue,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      ranks = #{record.ranks,jdbcType=VARCHAR},
+      article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
+      belong_to_the_sea = #{record.belongToTheSea,jdbcType=VARCHAR},
+      online = #{record.online,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE},
+      login_method = #{record.loginMethod,jdbcType=VARCHAR},
+      hh_id = #{record.hhId,jdbcType=VARCHAR},
+      limits = #{record.limits,jdbcType=BIGINT},
+      idiograph = #{record.idiograph,jdbcType=VARCHAR},
+      background_image = #{record.backgroundImage,jdbcType=VARCHAR},
+      gift_id = #{record.giftId,jdbcType=BIGINT},
+      interpersonal_id = #{record.interpersonalId,jdbcType=BIGINT},
+      room_id = #{record.roomId,jdbcType=BIGINT},
+      dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      money_id = #{record.moneyId,jdbcType=BIGINT},
+      balance_money = #{record.balanceMoney,jdbcType=DOUBLE},
+      head_photo = #{record.headPhoto,jdbcType=VARCHAR},
+      third_party_account = #{record.thirdPartyAccount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhUser" >
+    update hh_user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        pass_word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="empiricalValue != null" >
+        empirical_value = #{empiricalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="ranks != null" >
+        ranks = #{ranks,jdbcType=VARCHAR},
+      </if>
+      <if test="articleEnergy != null" >
+        article_energy = #{articleEnergy,jdbcType=VARCHAR},
+      </if>
+      <if test="belongToTheSea != null" >
+        belong_to_the_sea = #{belongToTheSea,jdbcType=VARCHAR},
+      </if>
+      <if test="online != null" >
+        online = #{online,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="loginMethod != null" >
+        login_method = #{loginMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="hhId != null" >
+        hh_id = #{hhId,jdbcType=VARCHAR},
+      </if>
+      <if test="limits != null" >
+        limits = #{limits,jdbcType=BIGINT},
+      </if>
+      <if test="idiograph != null" >
+        idiograph = #{idiograph,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImage != null" >
+        background_image = #{backgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="giftId != null" >
+        gift_id = #{giftId,jdbcType=BIGINT},
+      </if>
+      <if test="interpersonalId != null" >
+        interpersonal_id = #{interpersonalId,jdbcType=BIGINT},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="dynamicId != null" >
+        dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="moneyId != null" >
+        money_id = #{moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="balanceMoney != null" >
+        balance_money = #{balanceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="headPhoto != null" >
+        head_photo = #{headPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPartyAccount != null" >
+        third_party_account = #{thirdPartyAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhUser" >
+    update hh_user
+    set real_name = #{realName,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      pass_word = #{passWord,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      empirical_value = #{empiricalValue,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      ranks = #{ranks,jdbcType=VARCHAR},
+      article_energy = #{articleEnergy,jdbcType=VARCHAR},
+      belong_to_the_sea = #{belongToTheSea,jdbcType=VARCHAR},
+      online = #{online,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      login_method = #{loginMethod,jdbcType=VARCHAR},
+      hh_id = #{hhId,jdbcType=VARCHAR},
+      limits = #{limits,jdbcType=BIGINT},
+      idiograph = #{idiograph,jdbcType=VARCHAR},
+      background_image = #{backgroundImage,jdbcType=VARCHAR},
+      gift_id = #{giftId,jdbcType=BIGINT},
+      interpersonal_id = #{interpersonalId,jdbcType=BIGINT},
+      room_id = #{roomId,jdbcType=BIGINT},
+      dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      money_id = #{moneyId,jdbcType=BIGINT},
+      balance_money = #{balanceMoney,jdbcType=DOUBLE},
+      head_photo = #{headPhoto,jdbcType=VARCHAR},
+      third_party_account = #{thirdPartyAccount,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

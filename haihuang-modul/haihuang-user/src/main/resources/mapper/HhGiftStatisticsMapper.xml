@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chadianmeiyou.haihuanguser.mapper.HhGiftStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhGiftStatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="fish_food_money" property="fishFoodMoney" jdbcType="DOUBLE" />
+    <result column="fish_food_count" property="fishFoodCount" jdbcType="INTEGER" />
+    <result column=" pearl_money" property="pearlMoney" jdbcType="DOUBLE" />
+    <result column=" pearl_count" property="pearlCount" jdbcType="INTEGER" />
+    <result column="starfish_money" property="starfishMoney" jdbcType="DOUBLE" />
+    <result column="starfish_count" property="starfishCount" jdbcType="INTEGER" />
+    <result column="coralline_money" property="corallineMoney" jdbcType="DOUBLE" />
+    <result column="coralline_count" property="corallineCount" jdbcType="INTEGER" />
+    <result column="giant_clam_money" property="giantClamMoney" jdbcType="DOUBLE" />
+    <result column="giant_clam_count" property="giantClamCount" jdbcType="INTEGER" />
+    <result column="garnet_money" property="garnetMoney" jdbcType="DOUBLE" />
+    <result column="garnet_count" property="garnetCount" jdbcType="INTEGER" />
+    <result column="fish_tear_money" property="fishTearMoney" jdbcType="DOUBLE" />
+    <result column="fish_tear_count" property="fishTearCount" jdbcType="INTEGER" />
+    <result column="ocean_heart_money" property="oceanHeartMoney" jdbcType="DOUBLE" />
+    <result column="ocean_heart_count" property="oceanHeartCount" jdbcType="INTEGER" />
+    <result column="trident_money" property="tridentMoney" jdbcType="DOUBLE" />
+    <result column="trident_count" property="tridentCount" jdbcType="INTEGER" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="total_money" property="totalMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, fish_food_money, fish_food_count, " pearl_money", " pearl_count", starfish_money, 
+    starfish_count, coralline_money, coralline_count, giant_clam_money, giant_clam_count, 
+    garnet_money, garnet_count, fish_tear_money, fish_tear_count, ocean_heart_money, 
+    ocean_heart_count, trident_money, trident_count, total_count, total_money
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhGiftStatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hh_gift_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_gift_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_gift_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhGiftStatisticsExample" >
+    delete from hh_gift_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhGiftStatistics" >
+    insert into hh_gift_statistics (id, user_id, fish_food_money, 
+      fish_food_count, " pearl_money", " pearl_count", 
+      starfish_money, starfish_count, coralline_money, 
+      coralline_count, giant_clam_money, giant_clam_count, 
+      garnet_money, garnet_count, fish_tear_money, 
+      fish_tear_count, ocean_heart_money, ocean_heart_count, 
+      trident_money, trident_count, total_count, 
+      total_money)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{fishFoodMoney,jdbcType=DOUBLE}, 
+      #{fishFoodCount,jdbcType=INTEGER}, #{pearlMoney,jdbcType=DOUBLE}, #{pearlCount,jdbcType=INTEGER}, 
+      #{starfishMoney,jdbcType=DOUBLE}, #{starfishCount,jdbcType=INTEGER}, #{corallineMoney,jdbcType=DOUBLE}, 
+      #{corallineCount,jdbcType=INTEGER}, #{giantClamMoney,jdbcType=DOUBLE}, #{giantClamCount,jdbcType=INTEGER}, 
+      #{garnetMoney,jdbcType=DOUBLE}, #{garnetCount,jdbcType=INTEGER}, #{fishTearMoney,jdbcType=DOUBLE}, 
+      #{fishTearCount,jdbcType=INTEGER}, #{oceanHeartMoney,jdbcType=DOUBLE}, #{oceanHeartCount,jdbcType=INTEGER}, 
+      #{tridentMoney,jdbcType=DOUBLE}, #{tridentCount,jdbcType=INTEGER}, #{totalCount,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhGiftStatistics" >
+    insert into hh_gift_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="fishFoodMoney != null" >
+        fish_food_money,
+      </if>
+      <if test="fishFoodCount != null" >
+        fish_food_count,
+      </if>
+      <if test="pearlMoney != null" >
+        " pearl_money",
+      </if>
+      <if test="pearlCount != null" >
+        " pearl_count",
+      </if>
+      <if test="starfishMoney != null" >
+        starfish_money,
+      </if>
+      <if test="starfishCount != null" >
+        starfish_count,
+      </if>
+      <if test="corallineMoney != null" >
+        coralline_money,
+      </if>
+      <if test="corallineCount != null" >
+        coralline_count,
+      </if>
+      <if test="giantClamMoney != null" >
+        giant_clam_money,
+      </if>
+      <if test="giantClamCount != null" >
+        giant_clam_count,
+      </if>
+      <if test="garnetMoney != null" >
+        garnet_money,
+      </if>
+      <if test="garnetCount != null" >
+        garnet_count,
+      </if>
+      <if test="fishTearMoney != null" >
+        fish_tear_money,
+      </if>
+      <if test="fishTearCount != null" >
+        fish_tear_count,
+      </if>
+      <if test="oceanHeartMoney != null" >
+        ocean_heart_money,
+      </if>
+      <if test="oceanHeartCount != null" >
+        ocean_heart_count,
+      </if>
+      <if test="tridentMoney != null" >
+        trident_money,
+      </if>
+      <if test="tridentCount != null" >
+        trident_count,
+      </if>
+      <if test="totalCount != null" >
+        total_count,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="fishFoodMoney != null" >
+        #{fishFoodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fishFoodCount != null" >
+        #{fishFoodCount,jdbcType=INTEGER},
+      </if>
+      <if test="pearlMoney != null" >
+        #{pearlMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="pearlCount != null" >
+        #{pearlCount,jdbcType=INTEGER},
+      </if>
+      <if test="starfishMoney != null" >
+        #{starfishMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="starfishCount != null" >
+        #{starfishCount,jdbcType=INTEGER},
+      </if>
+      <if test="corallineMoney != null" >
+        #{corallineMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="corallineCount != null" >
+        #{corallineCount,jdbcType=INTEGER},
+      </if>
+      <if test="giantClamMoney != null" >
+        #{giantClamMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="giantClamCount != null" >
+        #{giantClamCount,jdbcType=INTEGER},
+      </if>
+      <if test="garnetMoney != null" >
+        #{garnetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="garnetCount != null" >
+        #{garnetCount,jdbcType=INTEGER},
+      </if>
+      <if test="fishTearMoney != null" >
+        #{fishTearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fishTearCount != null" >
+        #{fishTearCount,jdbcType=INTEGER},
+      </if>
+      <if test="oceanHeartMoney != null" >
+        #{oceanHeartMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="oceanHeartCount != null" >
+        #{oceanHeartCount,jdbcType=INTEGER},
+      </if>
+      <if test="tridentMoney != null" >
+        #{tridentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tridentCount != null" >
+        #{tridentCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhGiftStatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from hh_gift_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_gift_statistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fishFoodMoney != null" >
+        fish_food_money = #{record.fishFoodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fishFoodCount != null" >
+        fish_food_count = #{record.fishFoodCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.pearlMoney != null" >
+        " pearl_money" = #{record.pearlMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pearlCount != null" >
+        " pearl_count" = #{record.pearlCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.starfishMoney != null" >
+        starfish_money = #{record.starfishMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.starfishCount != null" >
+        starfish_count = #{record.starfishCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.corallineMoney != null" >
+        coralline_money = #{record.corallineMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.corallineCount != null" >
+        coralline_count = #{record.corallineCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.giantClamMoney != null" >
+        giant_clam_money = #{record.giantClamMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.giantClamCount != null" >
+        giant_clam_count = #{record.giantClamCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.garnetMoney != null" >
+        garnet_money = #{record.garnetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.garnetCount != null" >
+        garnet_count = #{record.garnetCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fishTearMoney != null" >
+        fish_tear_money = #{record.fishTearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fishTearCount != null" >
+        fish_tear_count = #{record.fishTearCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.oceanHeartMoney != null" >
+        ocean_heart_money = #{record.oceanHeartMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oceanHeartCount != null" >
+        ocean_heart_count = #{record.oceanHeartCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tridentMoney != null" >
+        trident_money = #{record.tridentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tridentCount != null" >
+        trident_count = #{record.tridentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalCount != null" >
+        total_count = #{record.totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_gift_statistics
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      fish_food_money = #{record.fishFoodMoney,jdbcType=DOUBLE},
+      fish_food_count = #{record.fishFoodCount,jdbcType=INTEGER},
+      " pearl_money" = #{record.pearlMoney,jdbcType=DOUBLE},
+      " pearl_count" = #{record.pearlCount,jdbcType=INTEGER},
+      starfish_money = #{record.starfishMoney,jdbcType=DOUBLE},
+      starfish_count = #{record.starfishCount,jdbcType=INTEGER},
+      coralline_money = #{record.corallineMoney,jdbcType=DOUBLE},
+      coralline_count = #{record.corallineCount,jdbcType=INTEGER},
+      giant_clam_money = #{record.giantClamMoney,jdbcType=DOUBLE},
+      giant_clam_count = #{record.giantClamCount,jdbcType=INTEGER},
+      garnet_money = #{record.garnetMoney,jdbcType=DOUBLE},
+      garnet_count = #{record.garnetCount,jdbcType=INTEGER},
+      fish_tear_money = #{record.fishTearMoney,jdbcType=DOUBLE},
+      fish_tear_count = #{record.fishTearCount,jdbcType=INTEGER},
+      ocean_heart_money = #{record.oceanHeartMoney,jdbcType=DOUBLE},
+      ocean_heart_count = #{record.oceanHeartCount,jdbcType=INTEGER},
+      trident_money = #{record.tridentMoney,jdbcType=DOUBLE},
+      trident_count = #{record.tridentCount,jdbcType=INTEGER},
+      total_count = #{record.totalCount,jdbcType=INTEGER},
+      total_money = #{record.totalMoney,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhGiftStatistics" >
+    update hh_gift_statistics
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="fishFoodMoney != null" >
+        fish_food_money = #{fishFoodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fishFoodCount != null" >
+        fish_food_count = #{fishFoodCount,jdbcType=INTEGER},
+      </if>
+      <if test="pearlMoney != null" >
+        " pearl_money" = #{pearlMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="pearlCount != null" >
+        " pearl_count" = #{pearlCount,jdbcType=INTEGER},
+      </if>
+      <if test="starfishMoney != null" >
+        starfish_money = #{starfishMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="starfishCount != null" >
+        starfish_count = #{starfishCount,jdbcType=INTEGER},
+      </if>
+      <if test="corallineMoney != null" >
+        coralline_money = #{corallineMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="corallineCount != null" >
+        coralline_count = #{corallineCount,jdbcType=INTEGER},
+      </if>
+      <if test="giantClamMoney != null" >
+        giant_clam_money = #{giantClamMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="giantClamCount != null" >
+        giant_clam_count = #{giantClamCount,jdbcType=INTEGER},
+      </if>
+      <if test="garnetMoney != null" >
+        garnet_money = #{garnetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="garnetCount != null" >
+        garnet_count = #{garnetCount,jdbcType=INTEGER},
+      </if>
+      <if test="fishTearMoney != null" >
+        fish_tear_money = #{fishTearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fishTearCount != null" >
+        fish_tear_count = #{fishTearCount,jdbcType=INTEGER},
+      </if>
+      <if test="oceanHeartMoney != null" >
+        ocean_heart_money = #{oceanHeartMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="oceanHeartCount != null" >
+        ocean_heart_count = #{oceanHeartCount,jdbcType=INTEGER},
+      </if>
+      <if test="tridentMoney != null" >
+        trident_money = #{tridentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tridentCount != null" >
+        trident_count = #{tridentCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        total_count = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhGiftStatistics" >
+    update hh_gift_statistics
+    set user_id = #{userId,jdbcType=BIGINT},
+      fish_food_money = #{fishFoodMoney,jdbcType=DOUBLE},
+      fish_food_count = #{fishFoodCount,jdbcType=INTEGER},
+      " pearl_money" = #{pearlMoney,jdbcType=DOUBLE},
+      " pearl_count" = #{pearlCount,jdbcType=INTEGER},
+      starfish_money = #{starfishMoney,jdbcType=DOUBLE},
+      starfish_count = #{starfishCount,jdbcType=INTEGER},
+      coralline_money = #{corallineMoney,jdbcType=DOUBLE},
+      coralline_count = #{corallineCount,jdbcType=INTEGER},
+      giant_clam_money = #{giantClamMoney,jdbcType=DOUBLE},
+      giant_clam_count = #{giantClamCount,jdbcType=INTEGER},
+      garnet_money = #{garnetMoney,jdbcType=DOUBLE},
+      garnet_count = #{garnetCount,jdbcType=INTEGER},
+      fish_tear_money = #{fishTearMoney,jdbcType=DOUBLE},
+      fish_tear_count = #{fishTearCount,jdbcType=INTEGER},
+      ocean_heart_money = #{oceanHeartMoney,jdbcType=DOUBLE},
+      ocean_heart_count = #{oceanHeartCount,jdbcType=INTEGER},
+      trident_money = #{tridentMoney,jdbcType=DOUBLE},
+      trident_count = #{tridentCount,jdbcType=INTEGER},
+      total_count = #{totalCount,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
