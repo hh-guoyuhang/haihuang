@@ -1,6 +1,8 @@
 package haihuang.tools;
 
 
+import haihuang.resp.CommenResp;
+import haihuang.resp.UploadDownloadResp;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,37 +16,46 @@ import java.util.List;
 
 public class UploadDownload {
 
-    @RequestMapping("/uploadFile")
-    @ResponseBody
-    public String uploadFile(@RequestParam("fileName") MultipartFile file) {
+    public static CommenResp<UploadDownloadResp> uploadFile(@RequestParam("fileName") MultipartFile file) {
+        CommenResp<UploadDownloadResp> commonResp = new CommenResp<UploadDownloadResp>();
+        UploadDownloadResp resp = new UploadDownloadResp();
         //判断文件是否为空
         if (file.isEmpty()) {
-            return "-1";
+            commonResp.setType("E");
+            commonResp.setMsg("文件不能为空！！");
+            return commonResp;
         }
-
-        String fileName = file.getOriginalFilename();
-
-        //加个时间戳，尽量避免文件名称重复
-        String path = "D:/" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
-        File dest = new File(path);
-
-        //判断文件是否已经存在
-        if (dest.exists()) {
-            return "-2";
-        }
-
-        //判断文件父目录是否存在
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdir();
-        }
-
         try {
+            //String fileName = file.getOriginalFilename();
+            String fileName = UUID16.getUUID();
+            //加个时间戳，尽量避免文件名称重复
+            String path = "D:/" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
+            File dest = new File(path);
+
+            //判断文件是否已经存在
+            if (dest.exists()) {
+                commonResp.setType("E");
+                commonResp.setMsg("文件已经存在！！");
+                return commonResp;
+            }
+
+            //判断文件父目录是否存在
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdir();
+            }
+
             file.transferTo(dest); //保存文件
+            resp.setName(fileName);
+            resp.setUrl(path);
         } catch (IOException e) {
-            return "-3";
+            e.printStackTrace();
+            commonResp.setType("E");
+            commonResp.setMsg("系统异常！！");
+            return commonResp;
         }
 
-        return "0";
+        commonResp.setBody(resp);
+        return commonResp;
     }
     @RequestMapping("/uploadMultifile")
     @ResponseBody

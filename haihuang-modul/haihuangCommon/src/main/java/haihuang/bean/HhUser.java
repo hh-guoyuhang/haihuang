@@ -1,13 +1,15 @@
 package haihuang.bean;
 
-import java.io.Serializable;
+import java.util.Date;
 
-public class HhUser implements Serializable {
+public class HhUser {
     private Long id;
 
     private String realName;
 
-    private String nickName;
+    private String userName;
+
+    private String userPhoto;
 
     private String mobilePhone;
 
@@ -19,25 +21,25 @@ public class HhUser implements Serializable {
 
     private String area;
 
-    private String sex;
+    private Integer sex;
 
-    private String empiricalValue;
+    private Integer empiricalValue;
 
-    private String grade;
+    private Integer grade;
 
-    private String ranks;
+    private Integer ranks;
 
     private String articleEnergy;
 
-    private String belongToTheSea;
+    private Integer belongToTheSea;
 
-    private String online;
+    private Integer online;
 
-    private Double money;
+    private Date logoutTime;
 
-    private String loginMethod;
+    private Integer loginMethod;
 
-    private String hhId;
+    private String hhid;
 
     private Long limits;
 
@@ -47,19 +49,21 @@ public class HhUser implements Serializable {
 
     private Long giftId;
 
-    private Long interpersonalId;
-
     private Long roomId;
 
     private Long dynamicId;
 
     private Long moneyId;
 
-    private Double balanceMoney;
+    private String thirdpartyaccount;
 
-    private String headPhoto;
+    private String yearOfBirth;
 
-    private String thirdPartyAccount;
+    private String monthOfBirth;
+
+    private String dayOfBirth;
+
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -77,12 +81,20 @@ public class HhUser implements Serializable {
         this.realName = realName == null ? null : realName.trim();
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto == null ? null : userPhoto.trim();
     }
 
     public String getMobilePhone() {
@@ -125,36 +137,36 @@ public class HhUser implements Serializable {
         this.area = area == null ? null : area.trim();
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
-    public String getEmpiricalValue() {
+    public Integer getEmpiricalValue() {
         return empiricalValue;
     }
 
-    public void setEmpiricalValue(String empiricalValue) {
-        this.empiricalValue = empiricalValue == null ? null : empiricalValue.trim();
+    public void setEmpiricalValue(Integer empiricalValue) {
+        this.empiricalValue = empiricalValue;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade == null ? null : grade.trim();
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
-    public String getRanks() {
+    public Integer getRanks() {
         return ranks;
     }
 
-    public void setRanks(String ranks) {
-        this.ranks = ranks == null ? null : ranks.trim();
+    public void setRanks(Integer ranks) {
+        this.ranks = ranks;
     }
 
     public String getArticleEnergy() {
@@ -165,44 +177,44 @@ public class HhUser implements Serializable {
         this.articleEnergy = articleEnergy == null ? null : articleEnergy.trim();
     }
 
-    public String getBelongToTheSea() {
+    public Integer getBelongToTheSea() {
         return belongToTheSea;
     }
 
-    public void setBelongToTheSea(String belongToTheSea) {
-        this.belongToTheSea = belongToTheSea == null ? null : belongToTheSea.trim();
+    public void setBelongToTheSea(Integer belongToTheSea) {
+        this.belongToTheSea = belongToTheSea;
     }
 
-    public String getOnline() {
+    public Integer getOnline() {
         return online;
     }
 
-    public void setOnline(String online) {
-        this.online = online == null ? null : online.trim();
+    public void setOnline(Integer online) {
+        this.online = online;
     }
 
-    public Double getMoney() {
-        return money;
+    public Date getLogoutTime() {
+        return logoutTime;
     }
 
-    public void setMoney(Double money) {
-        this.money = money;
+    public void setLogoutTime(Date logoutTime) {
+        this.logoutTime = logoutTime;
     }
 
-    public String getLoginMethod() {
+    public Integer getLoginMethod() {
         return loginMethod;
     }
 
-    public void setLoginMethod(String loginMethod) {
-        this.loginMethod = loginMethod == null ? null : loginMethod.trim();
+    public void setLoginMethod(Integer loginMethod) {
+        this.loginMethod = loginMethod;
     }
 
-    public String getHhId() {
-        return hhId;
+    public String getHhid() {
+        return hhid;
     }
 
-    public void setHhId(String hhId) {
-        this.hhId = hhId == null ? null : hhId.trim();
+    public void setHhid(String hhid) {
+        this.hhid = hhid == null ? null : hhid.trim();
     }
 
     public Long getLimits() {
@@ -237,14 +249,6 @@ public class HhUser implements Serializable {
         this.giftId = giftId;
     }
 
-    public Long getInterpersonalId() {
-        return interpersonalId;
-    }
-
-    public void setInterpersonalId(Long interpersonalId) {
-        this.interpersonalId = interpersonalId;
-    }
-
     public Long getRoomId() {
         return roomId;
     }
@@ -269,27 +273,43 @@ public class HhUser implements Serializable {
         this.moneyId = moneyId;
     }
 
-    public Double getBalanceMoney() {
-        return balanceMoney;
+    public String getThirdpartyaccount() {
+        return thirdpartyaccount;
     }
 
-    public void setBalanceMoney(Double balanceMoney) {
-        this.balanceMoney = balanceMoney;
+    public void setThirdpartyaccount(String thirdpartyaccount) {
+        this.thirdpartyaccount = thirdpartyaccount == null ? null : thirdpartyaccount.trim();
     }
 
-    public String getHeadPhoto() {
-        return headPhoto;
+    public String getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setHeadPhoto(String headPhoto) {
-        this.headPhoto = headPhoto == null ? null : headPhoto.trim();
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth == null ? null : yearOfBirth.trim();
     }
 
-    public String getThirdPartyAccount() {
-        return thirdPartyAccount;
+    public String getMonthOfBirth() {
+        return monthOfBirth;
     }
 
-    public void setThirdPartyAccount(String thirdPartyAccount) {
-        this.thirdPartyAccount = thirdPartyAccount == null ? null : thirdPartyAccount.trim();
+    public void setMonthOfBirth(String monthOfBirth) {
+        this.monthOfBirth = monthOfBirth == null ? null : monthOfBirth.trim();
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth == null ? null : dayOfBirth.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

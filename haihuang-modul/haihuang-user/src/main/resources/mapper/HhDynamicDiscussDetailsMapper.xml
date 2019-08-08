@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chadianmeiyou.haihuanguser.mapper.HhDynamicDiscussDetailsMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhDynamicDiscussDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
+    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, dynamic_id, user_name, user_photo, discuss, create_time, parent_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hh_dynamic_discuss_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_dynamic_discuss_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_dynamic_discuss_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" >
+    delete from hh_dynamic_discuss_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
+    insert into hh_dynamic_discuss_details (id, user_id, dynamic_id, 
+      user_name, user_photo, discuss, 
+      create_time, parent_id)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, 
+      #{userName,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR}, #{discuss,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{parentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
+    insert into hh_dynamic_discuss_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="dynamicId != null" >
+        dynamic_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhoto != null" >
+        user_photo,
+      </if>
+      <if test="discuss != null" >
+        discuss,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="dynamicId != null" >
+        #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="discuss != null" >
+        #{discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from hh_dynamic_discuss_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_dynamic_discuss_details
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dynamicId != null" >
+        dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhoto != null" >
+        user_photo = #{record.userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discuss != null" >
+        discuss = #{record.discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_dynamic_discuss_details
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_photo = #{record.userPhoto,jdbcType=VARCHAR},
+      discuss = #{record.discuss,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      parent_id = #{record.parentId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
+    update hh_dynamic_discuss_details
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="dynamicId != null" >
+        dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        user_photo = #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="discuss != null" >
+        discuss = #{discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
+    update hh_dynamic_discuss_details
+    set user_id = #{userId,jdbcType=BIGINT},
+      dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_photo = #{userPhoto,jdbcType=VARCHAR},
+      discuss = #{discuss,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

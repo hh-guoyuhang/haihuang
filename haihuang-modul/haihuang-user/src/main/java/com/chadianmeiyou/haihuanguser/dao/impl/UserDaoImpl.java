@@ -38,8 +38,8 @@ public class UserDaoImpl implements UserDao {
                 criteria.andMobilePhoneEqualTo(user.getMobilePhone());
             }
         }else{
-            if (StringUtils.isEmpty(user.getThirdPartyAccount())){
-                criteria.andThirdPartyAccountEqualTo(user.getThirdPartyAccount());
+            if (StringUtils.isEmpty(user.getThirdpartyaccount())){
+                criteria.andThirdpartyaccountEqualTo(user.getThirdpartyaccount());
             }
         }
         List<HhUser> hhUser = hhUserMapper.selectByExample(example);

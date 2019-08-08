@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chadianmeiyou.haihuanguser.mapper.HhMoneyDetailsMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhMoneyDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="money_id" property="moneyId" jdbcType="BIGINT" />
+    <result column="shell_income_and_expenses" property="shellIncomeAndExpenses" jdbcType="INTEGER" />
+    <result column="original_shell" property="originalShell" jdbcType="BIGINT" />
+    <result column="current_shell" property="currentShell" jdbcType="BIGINT" />
+    <result column="shell_opponent_user_id" property="shellOpponentUserId" jdbcType="BIGINT" />
+    <result column="rmb_income_and_expenses" property="rmbIncomeAndExpenses" jdbcType="INTEGER" />
+    <result column="original_money" property="originalMoney" jdbcType="DOUBLE" />
+    <result column="current_money" property="currentMoney" jdbcType="DOUBLE" />
+    <result column="rmb_opponent_user_id" property="rmbOpponentUserId" jdbcType="BIGINT" />
+    <result column="wexin_account" property="wexinAccount" jdbcType="VARCHAR" />
+    <result column="zhifubao_account" property="zhifubaoAccount" jdbcType="VARCHAR" />
+    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="shell_create_time" property="shellCreateTime" jdbcType="TIMESTAMP" />
+    <result column="rmb_create_time" property="rmbCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, money_id, shell_income_and_expenses, original_shell, current_shell, shell_opponent_user_id, 
+    rmb_income_and_expenses, original_money, current_money, rmb_opponent_user_id, wexin_account, 
+    zhifubao_account, bank_card, shell_create_time, rmb_create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhMoneyDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hh_money_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_money_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_money_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhMoneyDetailsExample" >
+    delete from hh_money_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhMoneyDetails" >
+    insert into hh_money_details (id, money_id, shell_income_and_expenses, 
+      original_shell, current_shell, shell_opponent_user_id, 
+      rmb_income_and_expenses, original_money, current_money, 
+      rmb_opponent_user_id, wexin_account, zhifubao_account, 
+      bank_card, shell_create_time, rmb_create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{moneyId,jdbcType=BIGINT}, #{shellIncomeAndExpenses,jdbcType=INTEGER}, 
+      #{originalShell,jdbcType=BIGINT}, #{currentShell,jdbcType=BIGINT}, #{shellOpponentUserId,jdbcType=BIGINT}, 
+      #{rmbIncomeAndExpenses,jdbcType=INTEGER}, #{originalMoney,jdbcType=DOUBLE}, #{currentMoney,jdbcType=DOUBLE}, 
+      #{rmbOpponentUserId,jdbcType=BIGINT}, #{wexinAccount,jdbcType=VARCHAR}, #{zhifubaoAccount,jdbcType=VARCHAR}, 
+      #{bankCard,jdbcType=VARCHAR}, #{shellCreateTime,jdbcType=TIMESTAMP}, #{rmbCreateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhMoneyDetails" >
+    insert into hh_money_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="moneyId != null" >
+        money_id,
+      </if>
+      <if test="shellIncomeAndExpenses != null" >
+        shell_income_and_expenses,
+      </if>
+      <if test="originalShell != null" >
+        original_shell,
+      </if>
+      <if test="currentShell != null" >
+        current_shell,
+      </if>
+      <if test="shellOpponentUserId != null" >
+        shell_opponent_user_id,
+      </if>
+      <if test="rmbIncomeAndExpenses != null" >
+        rmb_income_and_expenses,
+      </if>
+      <if test="originalMoney != null" >
+        original_money,
+      </if>
+      <if test="currentMoney != null" >
+        current_money,
+      </if>
+      <if test="rmbOpponentUserId != null" >
+        rmb_opponent_user_id,
+      </if>
+      <if test="wexinAccount != null" >
+        wexin_account,
+      </if>
+      <if test="zhifubaoAccount != null" >
+        zhifubao_account,
+      </if>
+      <if test="bankCard != null" >
+        bank_card,
+      </if>
+      <if test="shellCreateTime != null" >
+        shell_create_time,
+      </if>
+      <if test="rmbCreateTime != null" >
+        rmb_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="moneyId != null" >
+        #{moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="shellIncomeAndExpenses != null" >
+        #{shellIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="originalShell != null" >
+        #{originalShell,jdbcType=BIGINT},
+      </if>
+      <if test="currentShell != null" >
+        #{currentShell,jdbcType=BIGINT},
+      </if>
+      <if test="shellOpponentUserId != null" >
+        #{shellOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="rmbIncomeAndExpenses != null" >
+        #{rmbIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="originalMoney != null" >
+        #{originalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="currentMoney != null" >
+        #{currentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="rmbOpponentUserId != null" >
+        #{rmbOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="wexinAccount != null" >
+        #{wexinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifubaoAccount != null" >
+        #{zhifubaoAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="shellCreateTime != null" >
+        #{shellCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmbCreateTime != null" >
+        #{rmbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhMoneyDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from hh_money_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_money_details
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.moneyId != null" >
+        money_id = #{record.moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shellIncomeAndExpenses != null" >
+        shell_income_and_expenses = #{record.shellIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="record.originalShell != null" >
+        original_shell = #{record.originalShell,jdbcType=BIGINT},
+      </if>
+      <if test="record.currentShell != null" >
+        current_shell = #{record.currentShell,jdbcType=BIGINT},
+      </if>
+      <if test="record.shellOpponentUserId != null" >
+        shell_opponent_user_id = #{record.shellOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rmbIncomeAndExpenses != null" >
+        rmb_income_and_expenses = #{record.rmbIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="record.originalMoney != null" >
+        original_money = #{record.originalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.currentMoney != null" >
+        current_money = #{record.currentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rmbOpponentUserId != null" >
+        rmb_opponent_user_id = #{record.rmbOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.wexinAccount != null" >
+        wexin_account = #{record.wexinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhifubaoAccount != null" >
+        zhifubao_account = #{record.zhifubaoAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCard != null" >
+        bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shellCreateTime != null" >
+        shell_create_time = #{record.shellCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rmbCreateTime != null" >
+        rmb_create_time = #{record.rmbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_money_details
+    set id = #{record.id,jdbcType=BIGINT},
+      money_id = #{record.moneyId,jdbcType=BIGINT},
+      shell_income_and_expenses = #{record.shellIncomeAndExpenses,jdbcType=INTEGER},
+      original_shell = #{record.originalShell,jdbcType=BIGINT},
+      current_shell = #{record.currentShell,jdbcType=BIGINT},
+      shell_opponent_user_id = #{record.shellOpponentUserId,jdbcType=BIGINT},
+      rmb_income_and_expenses = #{record.rmbIncomeAndExpenses,jdbcType=INTEGER},
+      original_money = #{record.originalMoney,jdbcType=DOUBLE},
+      current_money = #{record.currentMoney,jdbcType=DOUBLE},
+      rmb_opponent_user_id = #{record.rmbOpponentUserId,jdbcType=BIGINT},
+      wexin_account = #{record.wexinAccount,jdbcType=VARCHAR},
+      zhifubao_account = #{record.zhifubaoAccount,jdbcType=VARCHAR},
+      bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      shell_create_time = #{record.shellCreateTime,jdbcType=TIMESTAMP},
+      rmb_create_time = #{record.rmbCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhMoneyDetails" >
+    update hh_money_details
+    <set >
+      <if test="moneyId != null" >
+        money_id = #{moneyId,jdbcType=BIGINT},
+      </if>
+      <if test="shellIncomeAndExpenses != null" >
+        shell_income_and_expenses = #{shellIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="originalShell != null" >
+        original_shell = #{originalShell,jdbcType=BIGINT},
+      </if>
+      <if test="currentShell != null" >
+        current_shell = #{currentShell,jdbcType=BIGINT},
+      </if>
+      <if test="shellOpponentUserId != null" >
+        shell_opponent_user_id = #{shellOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="rmbIncomeAndExpenses != null" >
+        rmb_income_and_expenses = #{rmbIncomeAndExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="originalMoney != null" >
+        original_money = #{originalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="currentMoney != null" >
+        current_money = #{currentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="rmbOpponentUserId != null" >
+        rmb_opponent_user_id = #{rmbOpponentUserId,jdbcType=BIGINT},
+      </if>
+      <if test="wexinAccount != null" >
+        wexin_account = #{wexinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifubaoAccount != null" >
+        zhifubao_account = #{zhifubaoAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="shellCreateTime != null" >
+        shell_create_time = #{shellCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rmbCreateTime != null" >
+        rmb_create_time = #{rmbCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhMoneyDetails" >
+    update hh_money_details
+    set money_id = #{moneyId,jdbcType=BIGINT},
+      shell_income_and_expenses = #{shellIncomeAndExpenses,jdbcType=INTEGER},
+      original_shell = #{originalShell,jdbcType=BIGINT},
+      current_shell = #{currentShell,jdbcType=BIGINT},
+      shell_opponent_user_id = #{shellOpponentUserId,jdbcType=BIGINT},
+      rmb_income_and_expenses = #{rmbIncomeAndExpenses,jdbcType=INTEGER},
+      original_money = #{originalMoney,jdbcType=DOUBLE},
+      current_money = #{currentMoney,jdbcType=DOUBLE},
+      rmb_opponent_user_id = #{rmbOpponentUserId,jdbcType=BIGINT},
+      wexin_account = #{wexinAccount,jdbcType=VARCHAR},
+      zhifubao_account = #{zhifubaoAccount,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      shell_create_time = #{shellCreateTime,jdbcType=TIMESTAMP},
+      rmb_create_time = #{rmbCreateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

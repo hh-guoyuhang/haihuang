@@ -4,33 +4,35 @@
   <resultMap id="BaseResultMap" type="haihuang.bean.HhUser" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
-    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
     <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
     <result column="pass_word" property="passWord" jdbcType="VARCHAR" />
     <result column="id_card" property="idCard" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="area" property="area" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="empirical_value" property="empiricalValue" jdbcType="VARCHAR" />
-    <result column="grade" property="grade" jdbcType="VARCHAR" />
-    <result column="ranks" property="ranks" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="empirical_value" property="empiricalValue" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="ranks" property="ranks" jdbcType="INTEGER" />
     <result column="article_energy" property="articleEnergy" jdbcType="VARCHAR" />
-    <result column="belong_to_the_sea" property="belongToTheSea" jdbcType="VARCHAR" />
-    <result column="online" property="online" jdbcType="VARCHAR" />
-    <result column="money" property="money" jdbcType="DOUBLE" />
-    <result column="login_method" property="loginMethod" jdbcType="VARCHAR" />
-    <result column="hh_id" property="hhId" jdbcType="VARCHAR" />
+    <result column="belong_to_the_sea" property="belongToTheSea" jdbcType="INTEGER" />
+    <result column="online" property="online" jdbcType="INTEGER" />
+    <result column="logout_time" property="logoutTime" jdbcType="TIMESTAMP" />
+    <result column="login_method" property="loginMethod" jdbcType="INTEGER" />
+    <result column="hhId" property="hhid" jdbcType="VARCHAR" />
     <result column="limits" property="limits" jdbcType="BIGINT" />
     <result column="idiograph" property="idiograph" jdbcType="VARCHAR" />
     <result column="background_image" property="backgroundImage" jdbcType="VARCHAR" />
-    <result column="gift_id" property="giftId" jdbcType="BIGINT" />
-    <result column="interpersonal_id" property="interpersonalId" jdbcType="BIGINT" />
+    <result column="gift_Id" property="giftId" jdbcType="BIGINT" />
     <result column="room_id" property="roomId" jdbcType="BIGINT" />
     <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
     <result column="money_id" property="moneyId" jdbcType="BIGINT" />
-    <result column="balance_money" property="balanceMoney" jdbcType="DOUBLE" />
-    <result column="head_photo" property="headPhoto" jdbcType="VARCHAR" />
-    <result column="third_party_account" property="thirdPartyAccount" jdbcType="VARCHAR" />
+    <result column="thirdPartyAccount" property="thirdpartyaccount" jdbcType="VARCHAR" />
+    <result column="year_of_birth" property="yearOfBirth" jdbcType="VARCHAR" />
+    <result column="month_of_birth" property="monthOfBirth" jdbcType="VARCHAR" />
+    <result column="day_of_birth" property="dayOfBirth" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -91,16 +93,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, real_name, nick_name, mobile_phone, pass_word, id_card, age, area, sex, empirical_value, 
-    grade, ranks, article_energy, belong_to_the_sea, online, money, login_method, hh_id, 
-    limits, idiograph, background_image, gift_id, interpersonal_id, room_id, dynamic_id, 
-    money_id, balance_money, head_photo, third_party_account
+    id, real_name, user_name, user_photo, mobile_phone, pass_word, id_card, age, area, 
+    sex, empirical_value, grade, ranks, article_energy, belong_to_the_sea, online, logout_time, 
+    login_method, hhId, limits, idiograph, background_image, gift_Id, room_id, dynamic_id, 
+    money_id, thirdPartyAccount, year_of_birth, month_of_birth, day_of_birth, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhUserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
+    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from hh_user
     <if test="_parameter != null" >
@@ -127,26 +130,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="haihuang.bean.HhUser" >
-    insert into hh_user (id, real_name, nick_name, 
-      mobile_phone, pass_word, id_card, 
-      age, area, sex, empirical_value, 
-      grade, ranks, article_energy, 
-      belong_to_the_sea, online, money, 
-      login_method, hh_id, limits, 
-      idiograph, background_image, gift_id, 
-      interpersonal_id, room_id, dynamic_id, 
-      money_id, balance_money, head_photo, 
-      third_party_account)
-    values (#{id,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{mobilePhone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{empiricalValue,jdbcType=VARCHAR}, 
-      #{grade,jdbcType=VARCHAR}, #{ranks,jdbcType=VARCHAR}, #{articleEnergy,jdbcType=VARCHAR}, 
-      #{belongToTheSea,jdbcType=VARCHAR}, #{online,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, 
-      #{loginMethod,jdbcType=VARCHAR}, #{hhId,jdbcType=VARCHAR}, #{limits,jdbcType=BIGINT}, 
-      #{idiograph,jdbcType=VARCHAR}, #{backgroundImage,jdbcType=VARCHAR}, #{giftId,jdbcType=BIGINT}, 
-      #{interpersonalId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, 
-      #{moneyId,jdbcType=BIGINT}, #{balanceMoney,jdbcType=DOUBLE}, #{headPhoto,jdbcType=VARCHAR}, 
-      #{thirdPartyAccount,jdbcType=VARCHAR})
+    insert into hh_user (id, real_name, user_name, 
+      user_photo, mobile_phone, pass_word, 
+      id_card, age, area, 
+      sex, empirical_value, grade, 
+      ranks, article_energy, belong_to_the_sea, 
+      online, logout_time, login_method, 
+      hhId, limits, idiograph, 
+      background_image, gift_Id, room_id, 
+      dynamic_id, money_id, thirdPartyAccount, 
+      year_of_birth, month_of_birth, day_of_birth, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPhoto,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{empiricalValue,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, 
+      #{ranks,jdbcType=INTEGER}, #{articleEnergy,jdbcType=VARCHAR}, #{belongToTheSea,jdbcType=INTEGER}, 
+      #{online,jdbcType=INTEGER}, #{logoutTime,jdbcType=TIMESTAMP}, #{loginMethod,jdbcType=INTEGER}, 
+      #{hhid,jdbcType=VARCHAR}, #{limits,jdbcType=BIGINT}, #{idiograph,jdbcType=VARCHAR}, 
+      #{backgroundImage,jdbcType=VARCHAR}, #{giftId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, 
+      #{dynamicId,jdbcType=BIGINT}, #{moneyId,jdbcType=BIGINT}, #{thirdpartyaccount,jdbcType=VARCHAR}, 
+      #{yearOfBirth,jdbcType=VARCHAR}, #{monthOfBirth,jdbcType=VARCHAR}, #{dayOfBirth,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="haihuang.bean.HhUser" >
     insert into hh_user
@@ -157,8 +162,11 @@
       <if test="realName != null" >
         real_name,
       </if>
-      <if test="nickName != null" >
-        nick_name,
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhoto != null" >
+        user_photo,
       </if>
       <if test="mobilePhone != null" >
         mobile_phone,
@@ -196,14 +204,14 @@
       <if test="online != null" >
         online,
       </if>
-      <if test="money != null" >
-        money,
+      <if test="logoutTime != null" >
+        logout_time,
       </if>
       <if test="loginMethod != null" >
         login_method,
       </if>
-      <if test="hhId != null" >
-        hh_id,
+      <if test="hhid != null" >
+        hhId,
       </if>
       <if test="limits != null" >
         limits,
@@ -215,10 +223,7 @@
         background_image,
       </if>
       <if test="giftId != null" >
-        gift_id,
-      </if>
-      <if test="interpersonalId != null" >
-        interpersonal_id,
+        gift_Id,
       </if>
       <if test="roomId != null" >
         room_id,
@@ -229,14 +234,20 @@
       <if test="moneyId != null" >
         money_id,
       </if>
-      <if test="balanceMoney != null" >
-        balance_money,
+      <if test="thirdpartyaccount != null" >
+        thirdPartyAccount,
       </if>
-      <if test="headPhoto != null" >
-        head_photo,
+      <if test="yearOfBirth != null" >
+        year_of_birth,
       </if>
-      <if test="thirdPartyAccount != null" >
-        third_party_account,
+      <if test="monthOfBirth != null" >
+        month_of_birth,
+      </if>
+      <if test="dayOfBirth != null" >
+        day_of_birth,
+      </if>
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -246,8 +257,11 @@
       <if test="realName != null" >
         #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        #{userPhoto,jdbcType=VARCHAR},
       </if>
       <if test="mobilePhone != null" >
         #{mobilePhone,jdbcType=VARCHAR},
@@ -265,34 +279,34 @@
         #{area,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        #{sex,jdbcType=VARCHAR},
+        #{sex,jdbcType=INTEGER},
       </if>
       <if test="empiricalValue != null" >
-        #{empiricalValue,jdbcType=VARCHAR},
+        #{empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="grade != null" >
-        #{grade,jdbcType=VARCHAR},
+        #{grade,jdbcType=INTEGER},
       </if>
       <if test="ranks != null" >
-        #{ranks,jdbcType=VARCHAR},
+        #{ranks,jdbcType=INTEGER},
       </if>
       <if test="articleEnergy != null" >
         #{articleEnergy,jdbcType=VARCHAR},
       </if>
       <if test="belongToTheSea != null" >
-        #{belongToTheSea,jdbcType=VARCHAR},
+        #{belongToTheSea,jdbcType=INTEGER},
       </if>
       <if test="online != null" >
-        #{online,jdbcType=VARCHAR},
+        #{online,jdbcType=INTEGER},
       </if>
-      <if test="money != null" >
-        #{money,jdbcType=DOUBLE},
+      <if test="logoutTime != null" >
+        #{logoutTime,jdbcType=TIMESTAMP},
       </if>
       <if test="loginMethod != null" >
-        #{loginMethod,jdbcType=VARCHAR},
+        #{loginMethod,jdbcType=INTEGER},
       </if>
-      <if test="hhId != null" >
-        #{hhId,jdbcType=VARCHAR},
+      <if test="hhid != null" >
+        #{hhid,jdbcType=VARCHAR},
       </if>
       <if test="limits != null" >
         #{limits,jdbcType=BIGINT},
@@ -306,9 +320,6 @@
       <if test="giftId != null" >
         #{giftId,jdbcType=BIGINT},
       </if>
-      <if test="interpersonalId != null" >
-        #{interpersonalId,jdbcType=BIGINT},
-      </if>
       <if test="roomId != null" >
         #{roomId,jdbcType=BIGINT},
       </if>
@@ -318,14 +329,20 @@
       <if test="moneyId != null" >
         #{moneyId,jdbcType=BIGINT},
       </if>
-      <if test="balanceMoney != null" >
-        #{balanceMoney,jdbcType=DOUBLE},
+      <if test="thirdpartyaccount != null" >
+        #{thirdpartyaccount,jdbcType=VARCHAR},
       </if>
-      <if test="headPhoto != null" >
-        #{headPhoto,jdbcType=VARCHAR},
+      <if test="yearOfBirth != null" >
+        #{yearOfBirth,jdbcType=VARCHAR},
       </if>
-      <if test="thirdPartyAccount != null" >
-        #{thirdPartyAccount,jdbcType=VARCHAR},
+      <if test="monthOfBirth != null" >
+        #{monthOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="dayOfBirth != null" >
+        #{dayOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -344,8 +361,11 @@
       <if test="record.realName != null" >
         real_name = #{record.realName,jdbcType=VARCHAR},
       </if>
-      <if test="record.nickName != null" >
-        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhoto != null" >
+        user_photo = #{record.userPhoto,jdbcType=VARCHAR},
       </if>
       <if test="record.mobilePhone != null" >
         mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
@@ -363,34 +383,34 @@
         area = #{record.area,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=INTEGER},
       </if>
       <if test="record.empiricalValue != null" >
-        empirical_value = #{record.empiricalValue,jdbcType=VARCHAR},
+        empirical_value = #{record.empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="record.grade != null" >
-        grade = #{record.grade,jdbcType=VARCHAR},
+        grade = #{record.grade,jdbcType=INTEGER},
       </if>
       <if test="record.ranks != null" >
-        ranks = #{record.ranks,jdbcType=VARCHAR},
+        ranks = #{record.ranks,jdbcType=INTEGER},
       </if>
       <if test="record.articleEnergy != null" >
         article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
       </if>
       <if test="record.belongToTheSea != null" >
-        belong_to_the_sea = #{record.belongToTheSea,jdbcType=VARCHAR},
+        belong_to_the_sea = #{record.belongToTheSea,jdbcType=INTEGER},
       </if>
       <if test="record.online != null" >
-        online = #{record.online,jdbcType=VARCHAR},
+        online = #{record.online,jdbcType=INTEGER},
       </if>
-      <if test="record.money != null" >
-        money = #{record.money,jdbcType=DOUBLE},
+      <if test="record.logoutTime != null" >
+        logout_time = #{record.logoutTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.loginMethod != null" >
-        login_method = #{record.loginMethod,jdbcType=VARCHAR},
+        login_method = #{record.loginMethod,jdbcType=INTEGER},
       </if>
-      <if test="record.hhId != null" >
-        hh_id = #{record.hhId,jdbcType=VARCHAR},
+      <if test="record.hhid != null" >
+        hhId = #{record.hhid,jdbcType=VARCHAR},
       </if>
       <if test="record.limits != null" >
         limits = #{record.limits,jdbcType=BIGINT},
@@ -402,10 +422,7 @@
         background_image = #{record.backgroundImage,jdbcType=VARCHAR},
       </if>
       <if test="record.giftId != null" >
-        gift_id = #{record.giftId,jdbcType=BIGINT},
-      </if>
-      <if test="record.interpersonalId != null" >
-        interpersonal_id = #{record.interpersonalId,jdbcType=BIGINT},
+        gift_Id = #{record.giftId,jdbcType=BIGINT},
       </if>
       <if test="record.roomId != null" >
         room_id = #{record.roomId,jdbcType=BIGINT},
@@ -416,14 +433,20 @@
       <if test="record.moneyId != null" >
         money_id = #{record.moneyId,jdbcType=BIGINT},
       </if>
-      <if test="record.balanceMoney != null" >
-        balance_money = #{record.balanceMoney,jdbcType=DOUBLE},
+      <if test="record.thirdpartyaccount != null" >
+        thirdPartyAccount = #{record.thirdpartyaccount,jdbcType=VARCHAR},
       </if>
-      <if test="record.headPhoto != null" >
-        head_photo = #{record.headPhoto,jdbcType=VARCHAR},
+      <if test="record.yearOfBirth != null" >
+        year_of_birth = #{record.yearOfBirth,jdbcType=VARCHAR},
       </if>
-      <if test="record.thirdPartyAccount != null" >
-        third_party_account = #{record.thirdPartyAccount,jdbcType=VARCHAR},
+      <if test="record.monthOfBirth != null" >
+        month_of_birth = #{record.monthOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayOfBirth != null" >
+        day_of_birth = #{record.dayOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -434,33 +457,35 @@
     update hh_user
     set id = #{record.id,jdbcType=BIGINT},
       real_name = #{record.realName,jdbcType=VARCHAR},
-      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_photo = #{record.userPhoto,jdbcType=VARCHAR},
       mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
       pass_word = #{record.passWord,jdbcType=VARCHAR},
       id_card = #{record.idCard,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
       area = #{record.area,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      empirical_value = #{record.empiricalValue,jdbcType=VARCHAR},
-      grade = #{record.grade,jdbcType=VARCHAR},
-      ranks = #{record.ranks,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      empirical_value = #{record.empiricalValue,jdbcType=INTEGER},
+      grade = #{record.grade,jdbcType=INTEGER},
+      ranks = #{record.ranks,jdbcType=INTEGER},
       article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
-      belong_to_the_sea = #{record.belongToTheSea,jdbcType=VARCHAR},
-      online = #{record.online,jdbcType=VARCHAR},
-      money = #{record.money,jdbcType=DOUBLE},
-      login_method = #{record.loginMethod,jdbcType=VARCHAR},
-      hh_id = #{record.hhId,jdbcType=VARCHAR},
+      belong_to_the_sea = #{record.belongToTheSea,jdbcType=INTEGER},
+      online = #{record.online,jdbcType=INTEGER},
+      logout_time = #{record.logoutTime,jdbcType=TIMESTAMP},
+      login_method = #{record.loginMethod,jdbcType=INTEGER},
+      hhId = #{record.hhid,jdbcType=VARCHAR},
       limits = #{record.limits,jdbcType=BIGINT},
       idiograph = #{record.idiograph,jdbcType=VARCHAR},
       background_image = #{record.backgroundImage,jdbcType=VARCHAR},
-      gift_id = #{record.giftId,jdbcType=BIGINT},
-      interpersonal_id = #{record.interpersonalId,jdbcType=BIGINT},
+      gift_Id = #{record.giftId,jdbcType=BIGINT},
       room_id = #{record.roomId,jdbcType=BIGINT},
       dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
       money_id = #{record.moneyId,jdbcType=BIGINT},
-      balance_money = #{record.balanceMoney,jdbcType=DOUBLE},
-      head_photo = #{record.headPhoto,jdbcType=VARCHAR},
-      third_party_account = #{record.thirdPartyAccount,jdbcType=VARCHAR}
+      thirdPartyAccount = #{record.thirdpartyaccount,jdbcType=VARCHAR},
+      year_of_birth = #{record.yearOfBirth,jdbcType=VARCHAR},
+      month_of_birth = #{record.monthOfBirth,jdbcType=VARCHAR},
+      day_of_birth = #{record.dayOfBirth,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -471,8 +496,11 @@
       <if test="realName != null" >
         real_name = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        user_photo = #{userPhoto,jdbcType=VARCHAR},
       </if>
       <if test="mobilePhone != null" >
         mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
@@ -490,34 +518,34 @@
         area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        sex = #{sex,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="empiricalValue != null" >
-        empirical_value = #{empiricalValue,jdbcType=VARCHAR},
+        empirical_value = #{empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="grade != null" >
-        grade = #{grade,jdbcType=VARCHAR},
+        grade = #{grade,jdbcType=INTEGER},
       </if>
       <if test="ranks != null" >
-        ranks = #{ranks,jdbcType=VARCHAR},
+        ranks = #{ranks,jdbcType=INTEGER},
       </if>
       <if test="articleEnergy != null" >
         article_energy = #{articleEnergy,jdbcType=VARCHAR},
       </if>
       <if test="belongToTheSea != null" >
-        belong_to_the_sea = #{belongToTheSea,jdbcType=VARCHAR},
+        belong_to_the_sea = #{belongToTheSea,jdbcType=INTEGER},
       </if>
       <if test="online != null" >
-        online = #{online,jdbcType=VARCHAR},
+        online = #{online,jdbcType=INTEGER},
       </if>
-      <if test="money != null" >
-        money = #{money,jdbcType=DOUBLE},
+      <if test="logoutTime != null" >
+        logout_time = #{logoutTime,jdbcType=TIMESTAMP},
       </if>
       <if test="loginMethod != null" >
-        login_method = #{loginMethod,jdbcType=VARCHAR},
+        login_method = #{loginMethod,jdbcType=INTEGER},
       </if>
-      <if test="hhId != null" >
-        hh_id = #{hhId,jdbcType=VARCHAR},
+      <if test="hhid != null" >
+        hhId = #{hhid,jdbcType=VARCHAR},
       </if>
       <if test="limits != null" >
         limits = #{limits,jdbcType=BIGINT},
@@ -529,10 +557,7 @@
         background_image = #{backgroundImage,jdbcType=VARCHAR},
       </if>
       <if test="giftId != null" >
-        gift_id = #{giftId,jdbcType=BIGINT},
-      </if>
-      <if test="interpersonalId != null" >
-        interpersonal_id = #{interpersonalId,jdbcType=BIGINT},
+        gift_Id = #{giftId,jdbcType=BIGINT},
       </if>
       <if test="roomId != null" >
         room_id = #{roomId,jdbcType=BIGINT},
@@ -543,14 +568,20 @@
       <if test="moneyId != null" >
         money_id = #{moneyId,jdbcType=BIGINT},
       </if>
-      <if test="balanceMoney != null" >
-        balance_money = #{balanceMoney,jdbcType=DOUBLE},
+      <if test="thirdpartyaccount != null" >
+        thirdPartyAccount = #{thirdpartyaccount,jdbcType=VARCHAR},
       </if>
-      <if test="headPhoto != null" >
-        head_photo = #{headPhoto,jdbcType=VARCHAR},
+      <if test="yearOfBirth != null" >
+        year_of_birth = #{yearOfBirth,jdbcType=VARCHAR},
       </if>
-      <if test="thirdPartyAccount != null" >
-        third_party_account = #{thirdPartyAccount,jdbcType=VARCHAR},
+      <if test="monthOfBirth != null" >
+        month_of_birth = #{monthOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="dayOfBirth != null" >
+        day_of_birth = #{dayOfBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -558,33 +589,35 @@
   <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhUser" >
     update hh_user
     set real_name = #{realName,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_photo = #{userPhoto,jdbcType=VARCHAR},
       mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
       pass_word = #{passWord,jdbcType=VARCHAR},
       id_card = #{idCard,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       area = #{area,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      empirical_value = #{empiricalValue,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=VARCHAR},
-      ranks = #{ranks,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      empirical_value = #{empiricalValue,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      ranks = #{ranks,jdbcType=INTEGER},
       article_energy = #{articleEnergy,jdbcType=VARCHAR},
-      belong_to_the_sea = #{belongToTheSea,jdbcType=VARCHAR},
-      online = #{online,jdbcType=VARCHAR},
-      money = #{money,jdbcType=DOUBLE},
-      login_method = #{loginMethod,jdbcType=VARCHAR},
-      hh_id = #{hhId,jdbcType=VARCHAR},
+      belong_to_the_sea = #{belongToTheSea,jdbcType=INTEGER},
+      online = #{online,jdbcType=INTEGER},
+      logout_time = #{logoutTime,jdbcType=TIMESTAMP},
+      login_method = #{loginMethod,jdbcType=INTEGER},
+      hhId = #{hhid,jdbcType=VARCHAR},
       limits = #{limits,jdbcType=BIGINT},
       idiograph = #{idiograph,jdbcType=VARCHAR},
       background_image = #{backgroundImage,jdbcType=VARCHAR},
-      gift_id = #{giftId,jdbcType=BIGINT},
-      interpersonal_id = #{interpersonalId,jdbcType=BIGINT},
+      gift_Id = #{giftId,jdbcType=BIGINT},
       room_id = #{roomId,jdbcType=BIGINT},
       dynamic_id = #{dynamicId,jdbcType=BIGINT},
       money_id = #{moneyId,jdbcType=BIGINT},
-      balance_money = #{balanceMoney,jdbcType=DOUBLE},
-      head_photo = #{headPhoto,jdbcType=VARCHAR},
-      third_party_account = #{thirdPartyAccount,jdbcType=VARCHAR}
+      thirdPartyAccount = #{thirdpartyaccount,jdbcType=VARCHAR},
+      year_of_birth = #{yearOfBirth,jdbcType=VARCHAR},
+      month_of_birth = #{monthOfBirth,jdbcType=VARCHAR},
+      day_of_birth = #{dayOfBirth,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
