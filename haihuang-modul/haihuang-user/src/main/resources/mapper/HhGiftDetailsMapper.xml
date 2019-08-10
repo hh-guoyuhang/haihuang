@@ -9,6 +9,7 @@
     <result column="gift_name" property="giftName" jdbcType="VARCHAR" />
     <result column="gift_count" property="giftCount" jdbcType="INTEGER" />
     <result column="gift_shell" property="giftShell" jdbcType="BIGINT" />
+    <result column="room_uuid" property="roomUuid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, out_user_id, in_user_id, gift_type, gift_name, gift_count, gift_shell, create_time
+    id, out_user_id, in_user_id, gift_type, gift_name, gift_count, gift_shell, room_uuid, 
+    create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhGiftDetailsExample" >
     select
@@ -106,10 +108,12 @@
   <insert id="insert" parameterType="haihuang.bean.HhGiftDetails" >
     insert into hh_gift_details (id, out_user_id, in_user_id, 
       gift_type, gift_name, gift_count, 
-      gift_shell, create_time)
+      gift_shell, room_uuid, create_time
+      )
     values (#{id,jdbcType=BIGINT}, #{outUserId,jdbcType=BIGINT}, #{inUserId,jdbcType=BIGINT}, 
       #{giftType,jdbcType=INTEGER}, #{giftName,jdbcType=VARCHAR}, #{giftCount,jdbcType=INTEGER}, 
-      #{giftShell,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{giftShell,jdbcType=BIGINT}, #{roomUuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="haihuang.bean.HhGiftDetails" >
     insert into hh_gift_details
@@ -134,6 +138,9 @@
       </if>
       <if test="giftShell != null" >
         gift_shell,
+      </if>
+      <if test="roomUuid != null" >
+        room_uuid,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -160,6 +167,9 @@
       </if>
       <if test="giftShell != null" >
         #{giftShell,jdbcType=BIGINT},
+      </if>
+      <if test="roomUuid != null" >
+        #{roomUuid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -196,6 +206,9 @@
       <if test="record.giftShell != null" >
         gift_shell = #{record.giftShell,jdbcType=BIGINT},
       </if>
+      <if test="record.roomUuid != null" >
+        room_uuid = #{record.roomUuid,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -213,6 +226,7 @@
       gift_name = #{record.giftName,jdbcType=VARCHAR},
       gift_count = #{record.giftCount,jdbcType=INTEGER},
       gift_shell = #{record.giftShell,jdbcType=BIGINT},
+      room_uuid = #{record.roomUuid,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -239,6 +253,9 @@
       <if test="giftShell != null" >
         gift_shell = #{giftShell,jdbcType=BIGINT},
       </if>
+      <if test="roomUuid != null" >
+        room_uuid = #{roomUuid,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -253,6 +270,7 @@
       gift_name = #{giftName,jdbcType=VARCHAR},
       gift_count = #{giftCount,jdbcType=INTEGER},
       gift_shell = #{giftShell,jdbcType=BIGINT},
+      room_uuid = #{roomUuid,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

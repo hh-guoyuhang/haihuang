@@ -17,6 +17,8 @@ public class HhGiftDetails {
 
     private Long giftShell;
 
+    private String roomUuid;
+
     private Date createTime;
 
     public Long getId() {
@@ -73,6 +75,14 @@ public class HhGiftDetails {
 
     public void setGiftShell(Long giftShell) {
         this.giftShell = giftShell;
+    }
+
+    public String getRoomUuid() {
+        return roomUuid;
+    }
+
+    public void setRoomUuid(String roomUuid) {
+        this.roomUuid = roomUuid == null ? null : roomUuid.trim();
     }
 
     public Date getCreateTime() {

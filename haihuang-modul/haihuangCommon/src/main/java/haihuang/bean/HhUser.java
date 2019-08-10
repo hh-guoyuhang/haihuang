@@ -23,13 +23,21 @@ public class HhUser {
 
     private Integer sex;
 
+    private Integer isEditSex;
+
     private Integer empiricalValue;
 
     private Integer grade;
 
+    private String gradePhoto;
+
     private Integer ranks;
 
-    private String articleEnergy;
+    private Long ranksOrder;
+
+    private Integer articleEnergyMin;
+
+    private Integer articleEnergyMax;
 
     private Integer belongToTheSea;
 
@@ -45,7 +53,9 @@ public class HhUser {
 
     private String idiograph;
 
-    private String backgroundImage;
+    private String myBackgroundImage;
+
+    private String mydetailsBackgroundImage;
 
     private Long giftId;
 
@@ -145,6 +155,14 @@ public class HhUser {
         this.sex = sex;
     }
 
+    public Integer getIsEditSex() {
+        return isEditSex;
+    }
+
+    public void setIsEditSex(Integer isEditSex) {
+        this.isEditSex = isEditSex;
+    }
+
     public Integer getEmpiricalValue() {
         return empiricalValue;
     }
@@ -161,6 +179,14 @@ public class HhUser {
         this.grade = grade;
     }
 
+    public String getGradePhoto() {
+        return gradePhoto;
+    }
+
+    public void setGradePhoto(String gradePhoto) {
+        this.gradePhoto = gradePhoto == null ? null : gradePhoto.trim();
+    }
+
     public Integer getRanks() {
         return ranks;
     }
@@ -169,12 +195,28 @@ public class HhUser {
         this.ranks = ranks;
     }
 
-    public String getArticleEnergy() {
-        return articleEnergy;
+    public Long getRanksOrder() {
+        return ranksOrder;
     }
 
-    public void setArticleEnergy(String articleEnergy) {
-        this.articleEnergy = articleEnergy == null ? null : articleEnergy.trim();
+    public void setRanksOrder(Long ranksOrder) {
+        this.ranksOrder = ranksOrder;
+    }
+
+    public Integer getArticleEnergyMin() {
+        return articleEnergyMin;
+    }
+
+    public void setArticleEnergyMin(Integer articleEnergyMin) {
+        this.articleEnergyMin = articleEnergyMin;
+    }
+
+    public Integer getArticleEnergyMax() {
+        return articleEnergyMax;
+    }
+
+    public void setArticleEnergyMax(Integer articleEnergyMax) {
+        this.articleEnergyMax = articleEnergyMax;
     }
 
     public Integer getBelongToTheSea() {
@@ -233,12 +275,20 @@ public class HhUser {
         this.idiograph = idiograph == null ? null : idiograph.trim();
     }
 
-    public String getBackgroundImage() {
-        return backgroundImage;
+    public String getMyBackgroundImage() {
+        return myBackgroundImage;
     }
 
-    public void setBackgroundImage(String backgroundImage) {
-        this.backgroundImage = backgroundImage == null ? null : backgroundImage.trim();
+    public void setMyBackgroundImage(String myBackgroundImage) {
+        this.myBackgroundImage = myBackgroundImage == null ? null : myBackgroundImage.trim();
+    }
+
+    public String getMydetailsBackgroundImage() {
+        return mydetailsBackgroundImage;
+    }
+
+    public void setMydetailsBackgroundImage(String mydetailsBackgroundImage) {
+        this.mydetailsBackgroundImage = mydetailsBackgroundImage == null ? null : mydetailsBackgroundImage.trim();
     }
 
     public Long getGiftId() {

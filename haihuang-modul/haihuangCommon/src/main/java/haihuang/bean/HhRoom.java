@@ -7,6 +7,8 @@ public class HhRoom {
 
     private Long roomId;
 
+    private String roomUuid;
+
     private Long userId;
 
     private String roomName;
@@ -31,6 +33,14 @@ public class HhRoom {
 
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
+    }
+
+    public String getRoomUuid() {
+        return roomUuid;
+    }
+
+    public void setRoomUuid(String roomUuid) {
+        this.roomUuid = roomUuid == null ? null : roomUuid.trim();
     }
 
     public Long getUserId() {

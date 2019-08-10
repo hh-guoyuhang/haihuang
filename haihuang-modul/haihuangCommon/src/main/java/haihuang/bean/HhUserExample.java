@@ -775,6 +775,66 @@ public class HhUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsEditSexIsNull() {
+            addCriterion("is_edit_sex is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexIsNotNull() {
+            addCriterion("is_edit_sex is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexEqualTo(Integer value) {
+            addCriterion("is_edit_sex =", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexNotEqualTo(Integer value) {
+            addCriterion("is_edit_sex <>", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexGreaterThan(Integer value) {
+            addCriterion("is_edit_sex >", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_edit_sex >=", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexLessThan(Integer value) {
+            addCriterion("is_edit_sex <", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexLessThanOrEqualTo(Integer value) {
+            addCriterion("is_edit_sex <=", value, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexIn(List<Integer> values) {
+            addCriterion("is_edit_sex in", values, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexNotIn(List<Integer> values) {
+            addCriterion("is_edit_sex not in", values, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexBetween(Integer value1, Integer value2) {
+            addCriterion("is_edit_sex between", value1, value2, "isEditSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEditSexNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_edit_sex not between", value1, value2, "isEditSex");
+            return (Criteria) this;
+        }
+
         public Criteria andEmpiricalValueIsNull() {
             addCriterion("empirical_value is null");
             return (Criteria) this;
@@ -895,6 +955,76 @@ public class HhUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andGradePhotoIsNull() {
+            addCriterion("grade_photo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoIsNotNull() {
+            addCriterion("grade_photo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoEqualTo(String value) {
+            addCriterion("grade_photo =", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoNotEqualTo(String value) {
+            addCriterion("grade_photo <>", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoGreaterThan(String value) {
+            addCriterion("grade_photo >", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("grade_photo >=", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoLessThan(String value) {
+            addCriterion("grade_photo <", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoLessThanOrEqualTo(String value) {
+            addCriterion("grade_photo <=", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoLike(String value) {
+            addCriterion("grade_photo like", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoNotLike(String value) {
+            addCriterion("grade_photo not like", value, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoIn(List<String> values) {
+            addCriterion("grade_photo in", values, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoNotIn(List<String> values) {
+            addCriterion("grade_photo not in", values, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoBetween(String value1, String value2) {
+            addCriterion("grade_photo between", value1, value2, "gradePhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andGradePhotoNotBetween(String value1, String value2) {
+            addCriterion("grade_photo not between", value1, value2, "gradePhoto");
+            return (Criteria) this;
+        }
+
         public Criteria andRanksIsNull() {
             addCriterion("ranks is null");
             return (Criteria) this;
@@ -955,73 +1085,183 @@ public class HhUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyIsNull() {
-            addCriterion("article_energy is null");
+        public Criteria andRanksOrderIsNull() {
+            addCriterion("ranks_order is null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyIsNotNull() {
-            addCriterion("article_energy is not null");
+        public Criteria andRanksOrderIsNotNull() {
+            addCriterion("ranks_order is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyEqualTo(String value) {
-            addCriterion("article_energy =", value, "articleEnergy");
+        public Criteria andRanksOrderEqualTo(Long value) {
+            addCriterion("ranks_order =", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyNotEqualTo(String value) {
-            addCriterion("article_energy <>", value, "articleEnergy");
+        public Criteria andRanksOrderNotEqualTo(Long value) {
+            addCriterion("ranks_order <>", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyGreaterThan(String value) {
-            addCriterion("article_energy >", value, "articleEnergy");
+        public Criteria andRanksOrderGreaterThan(Long value) {
+            addCriterion("ranks_order >", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyGreaterThanOrEqualTo(String value) {
-            addCriterion("article_energy >=", value, "articleEnergy");
+        public Criteria andRanksOrderGreaterThanOrEqualTo(Long value) {
+            addCriterion("ranks_order >=", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyLessThan(String value) {
-            addCriterion("article_energy <", value, "articleEnergy");
+        public Criteria andRanksOrderLessThan(Long value) {
+            addCriterion("ranks_order <", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyLessThanOrEqualTo(String value) {
-            addCriterion("article_energy <=", value, "articleEnergy");
+        public Criteria andRanksOrderLessThanOrEqualTo(Long value) {
+            addCriterion("ranks_order <=", value, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyLike(String value) {
-            addCriterion("article_energy like", value, "articleEnergy");
+        public Criteria andRanksOrderIn(List<Long> values) {
+            addCriterion("ranks_order in", values, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyNotLike(String value) {
-            addCriterion("article_energy not like", value, "articleEnergy");
+        public Criteria andRanksOrderNotIn(List<Long> values) {
+            addCriterion("ranks_order not in", values, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyIn(List<String> values) {
-            addCriterion("article_energy in", values, "articleEnergy");
+        public Criteria andRanksOrderBetween(Long value1, Long value2) {
+            addCriterion("ranks_order between", value1, value2, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyNotIn(List<String> values) {
-            addCriterion("article_energy not in", values, "articleEnergy");
+        public Criteria andRanksOrderNotBetween(Long value1, Long value2) {
+            addCriterion("ranks_order not between", value1, value2, "ranksOrder");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyBetween(String value1, String value2) {
-            addCriterion("article_energy between", value1, value2, "articleEnergy");
+        public Criteria andArticleEnergyMinIsNull() {
+            addCriterion("article_energy_min is null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleEnergyNotBetween(String value1, String value2) {
-            addCriterion("article_energy not between", value1, value2, "articleEnergy");
+        public Criteria andArticleEnergyMinIsNotNull() {
+            addCriterion("article_energy_min is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinEqualTo(Integer value) {
+            addCriterion("article_energy_min =", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinNotEqualTo(Integer value) {
+            addCriterion("article_energy_min <>", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinGreaterThan(Integer value) {
+            addCriterion("article_energy_min >", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinGreaterThanOrEqualTo(Integer value) {
+            addCriterion("article_energy_min >=", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinLessThan(Integer value) {
+            addCriterion("article_energy_min <", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinLessThanOrEqualTo(Integer value) {
+            addCriterion("article_energy_min <=", value, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinIn(List<Integer> values) {
+            addCriterion("article_energy_min in", values, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinNotIn(List<Integer> values) {
+            addCriterion("article_energy_min not in", values, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinBetween(Integer value1, Integer value2) {
+            addCriterion("article_energy_min between", value1, value2, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMinNotBetween(Integer value1, Integer value2) {
+            addCriterion("article_energy_min not between", value1, value2, "articleEnergyMin");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxIsNull() {
+            addCriterion("article_energy_max is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxIsNotNull() {
+            addCriterion("article_energy_max is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxEqualTo(Integer value) {
+            addCriterion("article_energy_max =", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxNotEqualTo(Integer value) {
+            addCriterion("article_energy_max <>", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxGreaterThan(Integer value) {
+            addCriterion("article_energy_max >", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxGreaterThanOrEqualTo(Integer value) {
+            addCriterion("article_energy_max >=", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxLessThan(Integer value) {
+            addCriterion("article_energy_max <", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxLessThanOrEqualTo(Integer value) {
+            addCriterion("article_energy_max <=", value, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxIn(List<Integer> values) {
+            addCriterion("article_energy_max in", values, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxNotIn(List<Integer> values) {
+            addCriterion("article_energy_max not in", values, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxBetween(Integer value1, Integer value2) {
+            addCriterion("article_energy_max between", value1, value2, "articleEnergyMax");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleEnergyMaxNotBetween(Integer value1, Integer value2) {
+            addCriterion("article_energy_max not between", value1, value2, "articleEnergyMax");
             return (Criteria) this;
         }
 
@@ -1465,73 +1705,143 @@ public class HhUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageIsNull() {
-            addCriterion("background_image is null");
+        public Criteria andMyBackgroundImageIsNull() {
+            addCriterion("my_background_image is null");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageIsNotNull() {
-            addCriterion("background_image is not null");
+        public Criteria andMyBackgroundImageIsNotNull() {
+            addCriterion("my_background_image is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageEqualTo(String value) {
-            addCriterion("background_image =", value, "backgroundImage");
+        public Criteria andMyBackgroundImageEqualTo(String value) {
+            addCriterion("my_background_image =", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageNotEqualTo(String value) {
-            addCriterion("background_image <>", value, "backgroundImage");
+        public Criteria andMyBackgroundImageNotEqualTo(String value) {
+            addCriterion("my_background_image <>", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageGreaterThan(String value) {
-            addCriterion("background_image >", value, "backgroundImage");
+        public Criteria andMyBackgroundImageGreaterThan(String value) {
+            addCriterion("my_background_image >", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageGreaterThanOrEqualTo(String value) {
-            addCriterion("background_image >=", value, "backgroundImage");
+        public Criteria andMyBackgroundImageGreaterThanOrEqualTo(String value) {
+            addCriterion("my_background_image >=", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageLessThan(String value) {
-            addCriterion("background_image <", value, "backgroundImage");
+        public Criteria andMyBackgroundImageLessThan(String value) {
+            addCriterion("my_background_image <", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageLessThanOrEqualTo(String value) {
-            addCriterion("background_image <=", value, "backgroundImage");
+        public Criteria andMyBackgroundImageLessThanOrEqualTo(String value) {
+            addCriterion("my_background_image <=", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageLike(String value) {
-            addCriterion("background_image like", value, "backgroundImage");
+        public Criteria andMyBackgroundImageLike(String value) {
+            addCriterion("my_background_image like", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageNotLike(String value) {
-            addCriterion("background_image not like", value, "backgroundImage");
+        public Criteria andMyBackgroundImageNotLike(String value) {
+            addCriterion("my_background_image not like", value, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageIn(List<String> values) {
-            addCriterion("background_image in", values, "backgroundImage");
+        public Criteria andMyBackgroundImageIn(List<String> values) {
+            addCriterion("my_background_image in", values, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageNotIn(List<String> values) {
-            addCriterion("background_image not in", values, "backgroundImage");
+        public Criteria andMyBackgroundImageNotIn(List<String> values) {
+            addCriterion("my_background_image not in", values, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageBetween(String value1, String value2) {
-            addCriterion("background_image between", value1, value2, "backgroundImage");
+        public Criteria andMyBackgroundImageBetween(String value1, String value2) {
+            addCriterion("my_background_image between", value1, value2, "myBackgroundImage");
             return (Criteria) this;
         }
 
-        public Criteria andBackgroundImageNotBetween(String value1, String value2) {
-            addCriterion("background_image not between", value1, value2, "backgroundImage");
+        public Criteria andMyBackgroundImageNotBetween(String value1, String value2) {
+            addCriterion("my_background_image not between", value1, value2, "myBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageIsNull() {
+            addCriterion("myDetails_background_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageIsNotNull() {
+            addCriterion("myDetails_background_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageEqualTo(String value) {
+            addCriterion("myDetails_background_image =", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageNotEqualTo(String value) {
+            addCriterion("myDetails_background_image <>", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageGreaterThan(String value) {
+            addCriterion("myDetails_background_image >", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageGreaterThanOrEqualTo(String value) {
+            addCriterion("myDetails_background_image >=", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageLessThan(String value) {
+            addCriterion("myDetails_background_image <", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageLessThanOrEqualTo(String value) {
+            addCriterion("myDetails_background_image <=", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageLike(String value) {
+            addCriterion("myDetails_background_image like", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageNotLike(String value) {
+            addCriterion("myDetails_background_image not like", value, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageIn(List<String> values) {
+            addCriterion("myDetails_background_image in", values, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageNotIn(List<String> values) {
+            addCriterion("myDetails_background_image not in", values, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageBetween(String value1, String value2) {
+            addCriterion("myDetails_background_image between", value1, value2, "mydetailsBackgroundImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andMydetailsBackgroundImageNotBetween(String value1, String value2) {
+            addCriterion("myDetails_background_image not between", value1, value2, "mydetailsBackgroundImage");
             return (Criteria) this;
         }
 

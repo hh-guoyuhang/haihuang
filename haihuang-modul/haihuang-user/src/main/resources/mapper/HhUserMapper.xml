@@ -12,10 +12,14 @@
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="area" property="area" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="is_edit_sex" property="isEditSex" jdbcType="INTEGER" />
     <result column="empirical_value" property="empiricalValue" jdbcType="INTEGER" />
     <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="grade_photo" property="gradePhoto" jdbcType="VARCHAR" />
     <result column="ranks" property="ranks" jdbcType="INTEGER" />
-    <result column="article_energy" property="articleEnergy" jdbcType="VARCHAR" />
+    <result column="ranks_order" property="ranksOrder" jdbcType="BIGINT" />
+    <result column="article_energy_min" property="articleEnergyMin" jdbcType="INTEGER" />
+    <result column="article_energy_max" property="articleEnergyMax" jdbcType="INTEGER" />
     <result column="belong_to_the_sea" property="belongToTheSea" jdbcType="INTEGER" />
     <result column="online" property="online" jdbcType="INTEGER" />
     <result column="logout_time" property="logoutTime" jdbcType="TIMESTAMP" />
@@ -23,7 +27,8 @@
     <result column="hhId" property="hhid" jdbcType="VARCHAR" />
     <result column="limits" property="limits" jdbcType="BIGINT" />
     <result column="idiograph" property="idiograph" jdbcType="VARCHAR" />
-    <result column="background_image" property="backgroundImage" jdbcType="VARCHAR" />
+    <result column="my_background_image" property="myBackgroundImage" jdbcType="VARCHAR" />
+    <result column="myDetails_background_image" property="mydetailsBackgroundImage" jdbcType="VARCHAR" />
     <result column="gift_Id" property="giftId" jdbcType="BIGINT" />
     <result column="room_id" property="roomId" jdbcType="BIGINT" />
     <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
@@ -94,8 +99,9 @@
   </sql>
   <sql id="Base_Column_List" >
     id, real_name, user_name, user_photo, mobile_phone, pass_word, id_card, age, area, 
-    sex, empirical_value, grade, ranks, article_energy, belong_to_the_sea, online, logout_time, 
-    login_method, hhId, limits, idiograph, background_image, gift_Id, room_id, dynamic_id, 
+    sex, is_edit_sex, empirical_value, grade, grade_photo, ranks, ranks_order, article_energy_min, 
+    article_energy_max, belong_to_the_sea, online, logout_time, login_method, hhId, limits, 
+    idiograph, my_background_image, myDetails_background_image, gift_Id, room_id, dynamic_id, 
     money_id, thirdPartyAccount, year_of_birth, month_of_birth, day_of_birth, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhUserExample" >
@@ -133,25 +139,29 @@
     insert into hh_user (id, real_name, user_name, 
       user_photo, mobile_phone, pass_word, 
       id_card, age, area, 
-      sex, empirical_value, grade, 
-      ranks, article_energy, belong_to_the_sea, 
-      online, logout_time, login_method, 
-      hhId, limits, idiograph, 
-      background_image, gift_Id, room_id, 
-      dynamic_id, money_id, thirdPartyAccount, 
-      year_of_birth, month_of_birth, day_of_birth, 
-      create_time)
+      sex, is_edit_sex, empirical_value, 
+      grade, grade_photo, ranks, 
+      ranks_order, article_energy_min, article_energy_max, 
+      belong_to_the_sea, online, logout_time, 
+      login_method, hhId, limits, 
+      idiograph, my_background_image, myDetails_background_image, 
+      gift_Id, room_id, dynamic_id, 
+      money_id, thirdPartyAccount, year_of_birth, 
+      month_of_birth, day_of_birth, create_time
+      )
     values (#{id,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userPhoto,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{empiricalValue,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, 
-      #{ranks,jdbcType=INTEGER}, #{articleEnergy,jdbcType=VARCHAR}, #{belongToTheSea,jdbcType=INTEGER}, 
-      #{online,jdbcType=INTEGER}, #{logoutTime,jdbcType=TIMESTAMP}, #{loginMethod,jdbcType=INTEGER}, 
-      #{hhid,jdbcType=VARCHAR}, #{limits,jdbcType=BIGINT}, #{idiograph,jdbcType=VARCHAR}, 
-      #{backgroundImage,jdbcType=VARCHAR}, #{giftId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, 
-      #{dynamicId,jdbcType=BIGINT}, #{moneyId,jdbcType=BIGINT}, #{thirdpartyaccount,jdbcType=VARCHAR}, 
-      #{yearOfBirth,jdbcType=VARCHAR}, #{monthOfBirth,jdbcType=VARCHAR}, #{dayOfBirth,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{sex,jdbcType=INTEGER}, #{isEditSex,jdbcType=INTEGER}, #{empiricalValue,jdbcType=INTEGER}, 
+      #{grade,jdbcType=INTEGER}, #{gradePhoto,jdbcType=VARCHAR}, #{ranks,jdbcType=INTEGER}, 
+      #{ranksOrder,jdbcType=BIGINT}, #{articleEnergyMin,jdbcType=INTEGER}, #{articleEnergyMax,jdbcType=INTEGER}, 
+      #{belongToTheSea,jdbcType=INTEGER}, #{online,jdbcType=INTEGER}, #{logoutTime,jdbcType=TIMESTAMP}, 
+      #{loginMethod,jdbcType=INTEGER}, #{hhid,jdbcType=VARCHAR}, #{limits,jdbcType=BIGINT}, 
+      #{idiograph,jdbcType=VARCHAR}, #{myBackgroundImage,jdbcType=VARCHAR}, #{mydetailsBackgroundImage,jdbcType=VARCHAR}, 
+      #{giftId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, 
+      #{moneyId,jdbcType=BIGINT}, #{thirdpartyaccount,jdbcType=VARCHAR}, #{yearOfBirth,jdbcType=VARCHAR}, 
+      #{monthOfBirth,jdbcType=VARCHAR}, #{dayOfBirth,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="haihuang.bean.HhUser" >
     insert into hh_user
@@ -186,17 +196,29 @@
       <if test="sex != null" >
         sex,
       </if>
+      <if test="isEditSex != null" >
+        is_edit_sex,
+      </if>
       <if test="empiricalValue != null" >
         empirical_value,
       </if>
       <if test="grade != null" >
         grade,
       </if>
+      <if test="gradePhoto != null" >
+        grade_photo,
+      </if>
       <if test="ranks != null" >
         ranks,
       </if>
-      <if test="articleEnergy != null" >
-        article_energy,
+      <if test="ranksOrder != null" >
+        ranks_order,
+      </if>
+      <if test="articleEnergyMin != null" >
+        article_energy_min,
+      </if>
+      <if test="articleEnergyMax != null" >
+        article_energy_max,
       </if>
       <if test="belongToTheSea != null" >
         belong_to_the_sea,
@@ -219,8 +241,11 @@
       <if test="idiograph != null" >
         idiograph,
       </if>
-      <if test="backgroundImage != null" >
-        background_image,
+      <if test="myBackgroundImage != null" >
+        my_background_image,
+      </if>
+      <if test="mydetailsBackgroundImage != null" >
+        myDetails_background_image,
       </if>
       <if test="giftId != null" >
         gift_Id,
@@ -281,17 +306,29 @@
       <if test="sex != null" >
         #{sex,jdbcType=INTEGER},
       </if>
+      <if test="isEditSex != null" >
+        #{isEditSex,jdbcType=INTEGER},
+      </if>
       <if test="empiricalValue != null" >
         #{empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="grade != null" >
         #{grade,jdbcType=INTEGER},
       </if>
+      <if test="gradePhoto != null" >
+        #{gradePhoto,jdbcType=VARCHAR},
+      </if>
       <if test="ranks != null" >
         #{ranks,jdbcType=INTEGER},
       </if>
-      <if test="articleEnergy != null" >
-        #{articleEnergy,jdbcType=VARCHAR},
+      <if test="ranksOrder != null" >
+        #{ranksOrder,jdbcType=BIGINT},
+      </if>
+      <if test="articleEnergyMin != null" >
+        #{articleEnergyMin,jdbcType=INTEGER},
+      </if>
+      <if test="articleEnergyMax != null" >
+        #{articleEnergyMax,jdbcType=INTEGER},
       </if>
       <if test="belongToTheSea != null" >
         #{belongToTheSea,jdbcType=INTEGER},
@@ -314,8 +351,11 @@
       <if test="idiograph != null" >
         #{idiograph,jdbcType=VARCHAR},
       </if>
-      <if test="backgroundImage != null" >
-        #{backgroundImage,jdbcType=VARCHAR},
+      <if test="myBackgroundImage != null" >
+        #{myBackgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mydetailsBackgroundImage != null" >
+        #{mydetailsBackgroundImage,jdbcType=VARCHAR},
       </if>
       <if test="giftId != null" >
         #{giftId,jdbcType=BIGINT},
@@ -385,17 +425,29 @@
       <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=INTEGER},
       </if>
+      <if test="record.isEditSex != null" >
+        is_edit_sex = #{record.isEditSex,jdbcType=INTEGER},
+      </if>
       <if test="record.empiricalValue != null" >
         empirical_value = #{record.empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="record.grade != null" >
         grade = #{record.grade,jdbcType=INTEGER},
       </if>
+      <if test="record.gradePhoto != null" >
+        grade_photo = #{record.gradePhoto,jdbcType=VARCHAR},
+      </if>
       <if test="record.ranks != null" >
         ranks = #{record.ranks,jdbcType=INTEGER},
       </if>
-      <if test="record.articleEnergy != null" >
-        article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
+      <if test="record.ranksOrder != null" >
+        ranks_order = #{record.ranksOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleEnergyMin != null" >
+        article_energy_min = #{record.articleEnergyMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleEnergyMax != null" >
+        article_energy_max = #{record.articleEnergyMax,jdbcType=INTEGER},
       </if>
       <if test="record.belongToTheSea != null" >
         belong_to_the_sea = #{record.belongToTheSea,jdbcType=INTEGER},
@@ -418,8 +470,11 @@
       <if test="record.idiograph != null" >
         idiograph = #{record.idiograph,jdbcType=VARCHAR},
       </if>
-      <if test="record.backgroundImage != null" >
-        background_image = #{record.backgroundImage,jdbcType=VARCHAR},
+      <if test="record.myBackgroundImage != null" >
+        my_background_image = #{record.myBackgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mydetailsBackgroundImage != null" >
+        myDetails_background_image = #{record.mydetailsBackgroundImage,jdbcType=VARCHAR},
       </if>
       <if test="record.giftId != null" >
         gift_Id = #{record.giftId,jdbcType=BIGINT},
@@ -465,10 +520,14 @@
       age = #{record.age,jdbcType=INTEGER},
       area = #{record.area,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=INTEGER},
+      is_edit_sex = #{record.isEditSex,jdbcType=INTEGER},
       empirical_value = #{record.empiricalValue,jdbcType=INTEGER},
       grade = #{record.grade,jdbcType=INTEGER},
+      grade_photo = #{record.gradePhoto,jdbcType=VARCHAR},
       ranks = #{record.ranks,jdbcType=INTEGER},
-      article_energy = #{record.articleEnergy,jdbcType=VARCHAR},
+      ranks_order = #{record.ranksOrder,jdbcType=BIGINT},
+      article_energy_min = #{record.articleEnergyMin,jdbcType=INTEGER},
+      article_energy_max = #{record.articleEnergyMax,jdbcType=INTEGER},
       belong_to_the_sea = #{record.belongToTheSea,jdbcType=INTEGER},
       online = #{record.online,jdbcType=INTEGER},
       logout_time = #{record.logoutTime,jdbcType=TIMESTAMP},
@@ -476,7 +535,8 @@
       hhId = #{record.hhid,jdbcType=VARCHAR},
       limits = #{record.limits,jdbcType=BIGINT},
       idiograph = #{record.idiograph,jdbcType=VARCHAR},
-      background_image = #{record.backgroundImage,jdbcType=VARCHAR},
+      my_background_image = #{record.myBackgroundImage,jdbcType=VARCHAR},
+      myDetails_background_image = #{record.mydetailsBackgroundImage,jdbcType=VARCHAR},
       gift_Id = #{record.giftId,jdbcType=BIGINT},
       room_id = #{record.roomId,jdbcType=BIGINT},
       dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
@@ -520,17 +580,29 @@
       <if test="sex != null" >
         sex = #{sex,jdbcType=INTEGER},
       </if>
+      <if test="isEditSex != null" >
+        is_edit_sex = #{isEditSex,jdbcType=INTEGER},
+      </if>
       <if test="empiricalValue != null" >
         empirical_value = #{empiricalValue,jdbcType=INTEGER},
       </if>
       <if test="grade != null" >
         grade = #{grade,jdbcType=INTEGER},
       </if>
+      <if test="gradePhoto != null" >
+        grade_photo = #{gradePhoto,jdbcType=VARCHAR},
+      </if>
       <if test="ranks != null" >
         ranks = #{ranks,jdbcType=INTEGER},
       </if>
-      <if test="articleEnergy != null" >
-        article_energy = #{articleEnergy,jdbcType=VARCHAR},
+      <if test="ranksOrder != null" >
+        ranks_order = #{ranksOrder,jdbcType=BIGINT},
+      </if>
+      <if test="articleEnergyMin != null" >
+        article_energy_min = #{articleEnergyMin,jdbcType=INTEGER},
+      </if>
+      <if test="articleEnergyMax != null" >
+        article_energy_max = #{articleEnergyMax,jdbcType=INTEGER},
       </if>
       <if test="belongToTheSea != null" >
         belong_to_the_sea = #{belongToTheSea,jdbcType=INTEGER},
@@ -553,8 +625,11 @@
       <if test="idiograph != null" >
         idiograph = #{idiograph,jdbcType=VARCHAR},
       </if>
-      <if test="backgroundImage != null" >
-        background_image = #{backgroundImage,jdbcType=VARCHAR},
+      <if test="myBackgroundImage != null" >
+        my_background_image = #{myBackgroundImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mydetailsBackgroundImage != null" >
+        myDetails_background_image = #{mydetailsBackgroundImage,jdbcType=VARCHAR},
       </if>
       <if test="giftId != null" >
         gift_Id = #{giftId,jdbcType=BIGINT},
@@ -597,10 +672,14 @@
       age = #{age,jdbcType=INTEGER},
       area = #{area,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=INTEGER},
+      is_edit_sex = #{isEditSex,jdbcType=INTEGER},
       empirical_value = #{empiricalValue,jdbcType=INTEGER},
       grade = #{grade,jdbcType=INTEGER},
+      grade_photo = #{gradePhoto,jdbcType=VARCHAR},
       ranks = #{ranks,jdbcType=INTEGER},
-      article_energy = #{articleEnergy,jdbcType=VARCHAR},
+      ranks_order = #{ranksOrder,jdbcType=BIGINT},
+      article_energy_min = #{articleEnergyMin,jdbcType=INTEGER},
+      article_energy_max = #{articleEnergyMax,jdbcType=INTEGER},
       belong_to_the_sea = #{belongToTheSea,jdbcType=INTEGER},
       online = #{online,jdbcType=INTEGER},
       logout_time = #{logoutTime,jdbcType=TIMESTAMP},
@@ -608,7 +687,8 @@
       hhId = #{hhid,jdbcType=VARCHAR},
       limits = #{limits,jdbcType=BIGINT},
       idiograph = #{idiograph,jdbcType=VARCHAR},
-      background_image = #{backgroundImage,jdbcType=VARCHAR},
+      my_background_image = #{myBackgroundImage,jdbcType=VARCHAR},
+      myDetails_background_image = #{mydetailsBackgroundImage,jdbcType=VARCHAR},
       gift_Id = #{giftId,jdbcType=BIGINT},
       room_id = #{roomId,jdbcType=BIGINT},
       dynamic_id = #{dynamicId,jdbcType=BIGINT},
