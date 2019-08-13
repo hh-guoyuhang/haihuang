@@ -1,13 +1,16 @@
 package haihuang.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserVo implements Serializable {
     private Long id;//主键
 
     private String realName;//真实姓名
 
-    private String nickName;//昵称
+    private String userName;//用户姓名
+
+    private String userPhoto;//用户头像
 
     private String mobilePhone;//手机号
 
@@ -21,45 +24,57 @@ public class UserVo implements Serializable {
 
     private Integer sex;//性别
 
+    private Integer isEditSex;//是否编辑过性别
+
     private Integer empiricalValue;//经验值
 
     private Integer grade;//等级 1-10
 
+    private String gradePhoto;//等级图片
+
     private Integer ranks;//级别 1塘王 2河王 3江王 4海王 5海皇
 
-    private String articleEnergy;//能量条
+    private Long ranksOrder;//级别排序
 
-    private Integer belongToTheSea;//分属海洋 1太平洋 2大西洋 3印度洋 4印度洋
+    private Integer articleEnergyMin;//能量条最小值
+
+    private Integer articleEnergyMax;//能量条最大值
+
+    private Integer belongToTheSea;//所属海洋
 
     private Integer online;//是否在线 1在线 0离线
 
-    private Double money;//金额
+    private Date logoutTime;//登出时间
 
     private Integer loginMethod;//登录方式 0手机 1微信 2 QQ
 
-    private String hhId;//海皇ID
+    private String hhid;//海皇id
 
     private Long limits;//权限
 
     private String idiograph;//个性签名
 
-    private String backgroundImage;//背景图
+    private String myBackgroundImage;//我的背景图
 
-    private Long giftId;//礼物id
+    private String mydetailsBackgroundImage;//我的详情背景图
 
-    private Long interpersonalId;//人际关系id
+    private Long giftId;//礼物外键
 
-    private Long roomId;//房间id
+    private Long roomId;//房间外键
 
     private Long dynamicId;//动态id
 
     private Long moneyId;//钱包id
 
-    private Double balanceMoney;//余额
+    private String thirdpartyaccount;//第三方登录
 
-    private String headPhoto;//头像
+    private String yearOfBirth;//出生年
 
-    private String thirdPartyAccount;//第三方账号
+    private String monthOfBirth;//出生月
+
+    private String dayOfBirth;//出生日
+
+    private Date createTime;//创建时间
 
     public Long getId() {
         return id;
@@ -77,13 +92,6 @@ public class UserVo implements Serializable {
         this.realName = realName == null ? null : realName.trim();
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
-    }
 
     public String getMobilePhone() {
         return mobilePhone;
@@ -157,14 +165,6 @@ public class UserVo implements Serializable {
         this.ranks = ranks;
     }
 
-    public String getArticleEnergy() {
-        return articleEnergy;
-    }
-
-    public void setArticleEnergy(String articleEnergy) {
-        this.articleEnergy = articleEnergy == null ? null : articleEnergy.trim();
-    }
-
     public Integer getBelongToTheSea() {
         return belongToTheSea;
     }
@@ -181,28 +181,12 @@ public class UserVo implements Serializable {
         this.online = online;
     }
 
-    public Double getMoney() {
-        return money;
-    }
-
-    public void setMoney(Double money) {
-        this.money = money;
-    }
-
     public Integer getLoginMethod() {
         return loginMethod;
     }
 
     public void setLoginMethod(Integer loginMethod) {
         this.loginMethod = loginMethod;
-    }
-
-    public String getHhId() {
-        return hhId;
-    }
-
-    public void setHhId(String hhId) {
-        this.hhId = hhId == null ? null : hhId.trim();
     }
 
     public Long getLimits() {
@@ -221,28 +205,12 @@ public class UserVo implements Serializable {
         this.idiograph = idiograph == null ? null : idiograph.trim();
     }
 
-    public String getBackgroundImage() {
-        return backgroundImage;
-    }
-
-    public void setBackgroundImage(String backgroundImage) {
-        this.backgroundImage = backgroundImage == null ? null : backgroundImage.trim();
-    }
-
     public Long getGiftId() {
         return giftId;
     }
 
     public void setGiftId(Long giftId) {
         this.giftId = giftId;
-    }
-
-    public Long getInterpersonalId() {
-        return interpersonalId;
-    }
-
-    public void setInterpersonalId(Long interpersonalId) {
-        this.interpersonalId = interpersonalId;
     }
 
     public Long getRoomId() {
@@ -269,27 +237,131 @@ public class UserVo implements Serializable {
         this.moneyId = moneyId;
     }
 
-    public Double getBalanceMoney() {
-        return balanceMoney;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setBalanceMoney(Double balanceMoney) {
-        this.balanceMoney = balanceMoney;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getHeadPhoto() {
-        return headPhoto;
+    public String getUserPhoto() {
+        return userPhoto;
     }
 
-    public void setHeadPhoto(String headPhoto) {
-        this.headPhoto = headPhoto == null ? null : headPhoto.trim();
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
 
-    public String getThirdPartyAccount() {
-        return thirdPartyAccount;
+    public Integer getIsEditSex() {
+        return isEditSex;
     }
 
-    public void setThirdPartyAccount(String thirdPartyAccount) {
-        this.thirdPartyAccount = thirdPartyAccount;
+    public void setIsEditSex(Integer isEditSex) {
+        this.isEditSex = isEditSex;
+    }
+
+    public String getGradePhoto() {
+        return gradePhoto;
+    }
+
+    public void setGradePhoto(String gradePhoto) {
+        this.gradePhoto = gradePhoto;
+    }
+
+    public Long getRanksOrder() {
+        return ranksOrder;
+    }
+
+    public void setRanksOrder(Long ranksOrder) {
+        this.ranksOrder = ranksOrder;
+    }
+
+    public Integer getArticleEnergyMin() {
+        return articleEnergyMin;
+    }
+
+    public void setArticleEnergyMin(Integer articleEnergyMin) {
+        this.articleEnergyMin = articleEnergyMin;
+    }
+
+    public Integer getArticleEnergyMax() {
+        return articleEnergyMax;
+    }
+
+    public void setArticleEnergyMax(Integer articleEnergyMax) {
+        this.articleEnergyMax = articleEnergyMax;
+    }
+
+    public Date getLogoutTime() {
+        return logoutTime;
+    }
+
+    public void setLogoutTime(Date logoutTime) {
+        this.logoutTime = logoutTime;
+    }
+
+    public String getHhid() {
+        return hhid;
+    }
+
+    public void setHhid(String hhid) {
+        this.hhid = hhid;
+    }
+
+    public String getMyBackgroundImage() {
+        return myBackgroundImage;
+    }
+
+    public void setMyBackgroundImage(String myBackgroundImage) {
+        this.myBackgroundImage = myBackgroundImage;
+    }
+
+    public String getMydetailsBackgroundImage() {
+        return mydetailsBackgroundImage;
+    }
+
+    public void setMydetailsBackgroundImage(String mydetailsBackgroundImage) {
+        this.mydetailsBackgroundImage = mydetailsBackgroundImage;
+    }
+
+    public String getThirdpartyaccount() {
+        return thirdpartyaccount;
+    }
+
+    public void setThirdpartyaccount(String thirdpartyaccount) {
+        this.thirdpartyaccount = thirdpartyaccount;
+    }
+
+    public String getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public String getMonthOfBirth() {
+        return monthOfBirth;
+    }
+
+    public void setMonthOfBirth(String monthOfBirth) {
+        this.monthOfBirth = monthOfBirth;
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

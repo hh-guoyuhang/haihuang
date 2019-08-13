@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import haihuang.resp.GetMessageCodeResp;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -23,16 +24,18 @@ import static com.netflix.eureka.registry.Key.KeyType.JSON;
  * @Description:发送验证码
  */
 public class GetMessageCode {
-    private static final String QUERY_PATH = "https://api.miaodiyun.com/20150822/industrySMS/sendSMS";
-    private static final String ACCOUNT_SID = "";
-    private static final String AUTH_TOKEN = "";
+    private static final String QUERY_PATH = "https://openapi.miaodiyun.com/distributor/sendSMS";
+    private static final String ACCOUNT_SID = "1c9e4bcdc61f4d6430069f198300ec27";
+    private static final String AUTH_TOKEN = "60eaf58afe5e09c8267a7dedd8d00b97";
 
     // 根据相应的手机号发送验证码
     public static GetMessageCodeResp getCode(String phone) throws ParseException {
         String rod = smsCode();
-        String timestamp = getTimestamp();
-        String sig = getMD5(ACCOUNT_SID, AUTH_TOKEN, timestamp);
-        String tamp = "【海皇】尊敬的用户，您好，您的验证码为：" + rod + "，该验证码5分钟内有效，若非本人操作，请忽略此短信。";
+        // 时间戳
+        long timestamp = System.currentTimeMillis();
+        // 签名
+        String sig = DigestUtils.md5Hex(ACCOUNT_SID + AUTH_TOKEN + timestamp);
+        String tamp = "【北京差点没这个信息科技有限公司】海皇尊敬的用户，您好，您的验证码为：" + rod + "，该验证码5分钟内有效，若非本人操作，请忽略此短信。";
         OutputStreamWriter out = null;
         BufferedReader br = null;
         StringBuilder result = new StringBuilder();
@@ -47,7 +50,7 @@ public class GetMessageCode {
             connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
             // 提交请求
             out = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-            String args = getQueryArgs(ACCOUNT_SID, tamp, phone, timestamp, sig, "JSON");
+            String args = getQueryArgs(ACCOUNT_SID, tamp, phone, String.valueOf(timestamp), sig, "JSON");
             out.write(args);
             out.flush();
             // 读取返回参数

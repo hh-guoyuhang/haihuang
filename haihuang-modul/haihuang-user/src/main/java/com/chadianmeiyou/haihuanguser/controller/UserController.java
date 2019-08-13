@@ -2,6 +2,8 @@ package com.chadianmeiyou.haihuanguser.controller;
 
 
 import com.chadianmeiyou.haihuanguser.service.UserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import haihuang.enums.SexEnum;
 import haihuang.resp.CommenResp;
 import haihuang.resp.GetMessageCodeResp;
@@ -24,7 +26,31 @@ public class UserController {
     private UserService userService;
 
 
-
+    /**
+     * 短信验证
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/getMessageCode",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp<MessageCode> getMessageCode(String phone) {
+        CommenResp<MessageCode> resp = new CommenResp<MessageCode>();
+        MessageCode code = new MessageCode();
+        try{
+            GetMessageCodeResp res = GetMessageCode.getCode(phone);
+            code.setMessageCode(res.getMessageCode());
+            code.setPhone(phone);
+            resp.setBody(code);
+            if(!"0000".equals(res.getRespCode())){
+                resp.setType("E");
+                resp.setMsg(res.getRespDesc());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            resp.setType("E");
+            resp.setMsg(e.getMessage());
+        }
+        return resp;
+    }
     /**
      * 注册
      * @param userVo
@@ -63,24 +89,18 @@ public class UserController {
         }
         return resp;
     }
+
     /**
-     * 短信验证
-     * @param phone
+     * 根据条件查询用户
+     * @param userVo
      * @return
      */
-    @RequestMapping(value = "/getMessageCode",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp<MessageCode> getMessageCode(String phone) {
-        CommenResp<MessageCode> resp = new CommenResp<MessageCode>();
-        MessageCode code = new MessageCode();
+    @RequestMapping(value = "/queryUser",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp<UserVo> queryUser(UserVo userVo) {
+        CommenResp<UserVo> resp = new CommenResp<UserVo>();
         try{
-            GetMessageCodeResp res = GetMessageCode.getCode(phone);
-            code.setMessageCode(res.getMessageCode());
-            code.setPhone(phone);
-            resp.setBody(code);
-            if(!"00000".equals(res.getRespCode())){
-                resp.setType("E");
-                resp.setMsg(res.getRespDesc());
-            }
+            UserVo  usesr = userService.selectUserByVo(userVo);
+            resp.setBody(usesr);
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
@@ -88,16 +108,17 @@ public class UserController {
         }
         return resp;
     }
+
     /**
-     * 根据调减查询用户
+     * 分页查询用户
      * @param userVo
      * @return
      */
-    @RequestMapping(value = "/checkUser",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp<UserVo> checkUser(UserVo userVo) {
-        CommenResp<UserVo> resp = new CommenResp<UserVo>();
+    @RequestMapping(value = "/queryUserByPage",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp<PageInfo<UserVo>> queryUserByPage(UserVo userVo, Page page) {
+        CommenResp<PageInfo<UserVo>> resp = new CommenResp<PageInfo<UserVo>>();
         try{
-            UserVo  usesr = userService.selectUserByVo(userVo);
+            PageInfo<UserVo> usesr = userService.selectUserByPage(userVo,page);
             resp.setBody(usesr);
         }catch(Exception e){
             e.printStackTrace();

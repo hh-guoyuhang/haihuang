@@ -2,8 +2,12 @@ package com.chadianmeiyou.haihuanguser.dao.impl;
 
 import com.chadianmeiyou.haihuanguser.dao.UserDao;
 import com.chadianmeiyou.haihuanguser.mapper.HhUserMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhUser;
 import haihuang.bean.HhUserExample;
+import haihuang.utils.mapperUtils.UserMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -51,7 +55,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public HhUser selectUserByUser(HhUser user) {
-        return null;
+        HhUserExample example = UserMapperUtil.exampleIsNullCheck(user);
+        List<HhUser> hhUser = hhUserMapper.selectByExample(example);
+        if(hhUser.size() == 0){
+            return null;
+        }
+        return hhUser.get(0);
+    }
+
+    @Override
+    public PageInfo<HhUser> selectUserByPage(HhUser user, Page page) {
+        HhUserExample example = UserMapperUtil.exampleIsNullCheck(user);
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        List<HhUser> hhUser = hhUserMapper.selectByExample(example);
+        PageInfo<HhUser> pageInfo = new PageInfo<HhUser>(hhUser);
+        return pageInfo;
     }
 
 

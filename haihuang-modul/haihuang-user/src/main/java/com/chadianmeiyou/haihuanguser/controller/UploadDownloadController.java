@@ -7,10 +7,10 @@ import haihuang.resp.UploadDownloadResp;
 import haihuang.tools.UploadDownload;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-@Controller
+@RestController
 @RequestMapping(value = "/uploadDownload")
 public class UploadDownloadController {
     private static Logger logger = Logger.getLogger(UploadDownloadController.class);

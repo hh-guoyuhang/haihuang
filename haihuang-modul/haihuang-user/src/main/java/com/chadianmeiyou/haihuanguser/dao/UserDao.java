@@ -1,6 +1,10 @@
 package com.chadianmeiyou.haihuanguser.dao;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhUser;
+
+import java.util.List;
 
 public interface UserDao {
     /**
@@ -28,4 +32,12 @@ public interface UserDao {
      * @return
      */
     public HhUser selectUserByUser(HhUser user);
+
+    /**
+     * 分页查询用户清单
+     * @param user
+     * @param pageInfo
+     * @return
+     */
+    public PageInfo<HhUser> selectUserByPage(HhUser user, Page pageInfo);
 }
