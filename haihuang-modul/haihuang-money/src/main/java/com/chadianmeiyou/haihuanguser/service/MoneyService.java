@@ -10,11 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-public interface DynamicService {
-    /**
-     * 新增动态
-     * @param respList
-     * @param dynamicVo
-     */
-    public void saveDynamic(List<MultipartFile> respList, DynamicVo dynamicVo);
+public interface MoneyService {
+
+
 }
