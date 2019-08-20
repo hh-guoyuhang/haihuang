@@ -60,7 +60,6 @@ public class UserController {
     public CommenResp editUser(UserVo userVo) {
         CommenResp resp = new CommenResp();
         try{
-            SexEnum.BOY.toString();
             userService.editUser(userVo);
         }catch(Exception e){
             e.printStackTrace();

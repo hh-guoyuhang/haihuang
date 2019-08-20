@@ -50,22 +50,14 @@ public class UploadDownload {
         } catch (IOException e) {
             e.printStackTrace();
             commonResp.setType("E");
-            commonResp.setMsg("系统异常！！");
+            commonResp.setMsg("网络异常！");
             return commonResp;
         }
 
         commonResp.setBody(resp);
         return commonResp;
     }
-    @RequestMapping("/uploadMultifile")
-    @ResponseBody
-    public String keywordSubmitFile(@RequestParam("fileName") List<MultipartFile> files) {
-        for (MultipartFile file : files) {
-            //这里简单输出文件名称
-            System.out.println(file.getOriginalFilename());
-        }
-        return "0";
-    }
+
 
 
     @RequestMapping("/downloadFile")

@@ -11,9 +11,11 @@
     <name>haihuang</name>
     <url>http://maven.apache.org</url>
     <modules>
+        <module>haihuangCommon</module>
+        <module>haihuangOfficialWebsite</module>
         <module>haihuang-cloud</module>
         <module>haihuang-user</module>
-        <module>haihuangCommon</module>
+        <module>haihuang-dynamic</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,7 +37,6 @@
         <springCloud.version>1.3.2.RELEASE</springCloud.version>
     </properties>
     <build>
-        <finalName>haihuangService</finalName>
         <plugins>
             <plugin>
                 <inherited>true</inherited>
@@ -51,8 +52,18 @@
                     </compilerArguments>
                 </configuration>
             </plugin>
-
-
+            <plugin>
+                <!-- The plugin rewrites your manifest -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中 -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>

@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -45,6 +47,34 @@ public class UploadDownloadController {
 
         return uploadDownloadRespCommenResp;
     }
+
+    /**
+     * 批量上传文件
+     * @param files
+     * @return
+     */
+    @RequestMapping("/uploadMultifile")
+    @ResponseBody
+    public  CommenResp<List<UploadDownloadResp>> keywordSubmitFile(@RequestParam("fileName") List<MultipartFile> files) {
+        CommenResp<List<UploadDownloadResp>> resp = new CommenResp<List<UploadDownloadResp>>();
+        List<UploadDownloadResp> respList = new ArrayList<UploadDownloadResp>();
+        for (MultipartFile file : files) {
+            try{
+                CommenResp<UploadDownloadResp> uploadDownloadRespCommenResp = UploadDownload.uploadFile(file);
+                respList.add(uploadDownloadRespCommenResp.getBody());
+            }catch (Exception e){
+                e.printStackTrace();
+                resp.setMsg("网络异常！");
+                resp.setType("E");
+            }
+
+
+        }
+        resp.setBody(respList);
+        return resp;
+    }
+
+
 
     @RequestMapping("/downloadFile")
     @ResponseBody
