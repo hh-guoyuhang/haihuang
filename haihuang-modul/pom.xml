@@ -13,9 +13,12 @@
     <modules>
         <module>haihuangCommon</module>
         <module>haihuangOfficialWebsite</module>
+        <module>haihuang-dynamic</module>
         <module>haihuang-cloud</module>
         <module>haihuang-user</module>
-        <module>haihuang-dynamic</module>
+        <module>haihuang-gift</module>
+        <module>haihuang-room</module>
+        <module>haihuang-money</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
