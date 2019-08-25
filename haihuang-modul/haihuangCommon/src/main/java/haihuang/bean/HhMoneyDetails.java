@@ -1,8 +1,9 @@
 package haihuang.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HhMoneyDetails {
+public class HhMoneyDetails implements Serializable {
     private Long id;
 
     private Long moneyId;

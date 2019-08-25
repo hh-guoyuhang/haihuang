@@ -1,8 +1,9 @@
 package haihuang.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HhDiscussLikeDetails {
+public class HhDiscussLikeDetails implements Serializable {
     private Long id;
 
     private Long discussId;

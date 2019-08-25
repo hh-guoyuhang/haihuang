@@ -2,6 +2,7 @@ package com.chadianmeiyou.haihuanguser.controller;
 
 
 import com.chadianmeiyou.haihuanguser.service.MoneyService;
+import haihuang.utils.RedisConfiguration;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,5 +16,6 @@ public class MoneyController {
 
     @Autowired
     private MoneyService moneyService;
-
+    @Autowired
+    private RedisConfiguration redisConfiguration;
 }

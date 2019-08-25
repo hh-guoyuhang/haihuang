@@ -1,12 +1,12 @@
 package com.chadianmeiyou.haihuanguser.dao.impl;
 
 import com.chadianmeiyou.haihuanguser.dao.UserDao;
-import com.chadianmeiyou.haihuanguser.mapper.HhUserMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhUser;
 import haihuang.bean.HhUserExample;
+import haihuang.mapper.HhUserMapper;
 import haihuang.utils.mapperUtils.UserMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,14 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private HhUserMapper hhUserMapper;
+
+    public HhUser queryUserByid(long id) {
+        HhUser hhUser = hhUserMapper.selectByPrimaryKey(id);
+        return hhUser;
+    }
+
+
+
 
     @Override
     public HhUser addUser(HhUser user) {
@@ -73,4 +81,11 @@ public class UserDaoImpl implements UserDao {
     }
 
 
+    @Override
+    public List<HhUser> queryUser() {
+        HhUser user = new HhUser();
+        HhUserExample example = UserMapperUtil.exampleIsNullCheck(user);
+        List<HhUser> hhUser = hhUserMapper.selectByExample(example);
+        return hhUser;
+    }
 }

@@ -1,8 +1,9 @@
 package haihuang.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HhUser {
+public class HhUser implements Serializable {
     private Long id;
 
     private String realName;

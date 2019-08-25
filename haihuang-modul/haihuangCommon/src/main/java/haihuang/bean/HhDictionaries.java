@@ -1,6 +1,8 @@
 package haihuang.bean;
 
-public class HhDictionaries {
+import java.io.Serializable;
+
+public class HhDictionaries implements Serializable {
     private Long id;
 
     private String groupId;

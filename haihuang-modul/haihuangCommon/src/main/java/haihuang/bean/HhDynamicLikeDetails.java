@@ -1,8 +1,9 @@
 package haihuang.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HhDynamicLikeDetails {
+public class HhDynamicLikeDetails implements Serializable {
     private Long id;
 
     private Long dynamicId;

@@ -1,6 +1,8 @@
 package haihuang.bean;
 
-public class HhRoomDetails {
+import java.io.Serializable;
+
+public class HhRoomDetails implements Serializable {
     private Long id;
 
     private Long roomId;

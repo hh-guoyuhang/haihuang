@@ -9,6 +9,12 @@ import java.util.List;
 public interface UserDao {
     /**
      * 新增用户
+     * @param id
+     * @return
+     */
+    public HhUser queryUserByid(long id);
+    /**
+     * 新增用户
      * @param user
      * @return
      */
@@ -40,4 +46,9 @@ public interface UserDao {
      * @return
      */
     public PageInfo<HhUser> selectUserByPage(HhUser user, Page pageInfo);
+    /**
+     * 分页查询用户清单
+     * @return
+     */
+    public List<HhUser> queryUser();
 }

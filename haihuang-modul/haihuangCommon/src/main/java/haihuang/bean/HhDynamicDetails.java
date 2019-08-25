@@ -1,6 +1,8 @@
 package haihuang.bean;
 
-public class HhDynamicDetails {
+import java.io.Serializable;
+
+public class HhDynamicDetails implements Serializable {
     private Long id;
 
     private Long dynamicId;

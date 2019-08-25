@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DynamicVo implements Serializable {
+    private Long id;//用户id
     private Long userId;//用户id
 
     private Integer dynamicType;//动态类型 0-图片 1-视频 2-语音
@@ -45,6 +46,14 @@ public class DynamicVo implements Serializable {
     private String photo9;//
 
     private String isOnePicture;// 1-是 0-否
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getUserId() {
         return userId;

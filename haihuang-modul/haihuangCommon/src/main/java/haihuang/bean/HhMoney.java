@@ -1,6 +1,8 @@
 package haihuang.bean;
 
-public class HhMoney {
+import java.io.Serializable;
+
+public class HhMoney  implements Serializable {
     private Long id;
 
     private Long userId;

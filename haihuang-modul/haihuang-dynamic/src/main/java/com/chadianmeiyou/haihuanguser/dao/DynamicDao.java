@@ -4,7 +4,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhDynamic;
 import haihuang.bean.HhDynamicDetails;
-import haihuang.bean.HhUser;
+import haihuang.bean.HhDynamicLikeDetails;
+import haihuang.resp.DynamicResp;
+import haihuang.vo.DynamicVo;
 
 public interface DynamicDao {
     /**
@@ -19,4 +21,8 @@ public interface DynamicDao {
      * @return
      */
     public void saveDynamicDetails(HhDynamicDetails hhDynamicDetails);
+
+    public PageInfo<DynamicResp> selectDynamicByPage(DynamicVo dynamicVo, Page page);
+
+    public void saveDynamicLike(HhDynamicLikeDetails dynamicLikeDiscussVo);
 }

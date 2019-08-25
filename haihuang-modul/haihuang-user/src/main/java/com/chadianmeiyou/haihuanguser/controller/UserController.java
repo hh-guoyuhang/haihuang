@@ -4,7 +4,6 @@ package com.chadianmeiyou.haihuanguser.controller;
 import com.chadianmeiyou.haihuanguser.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import haihuang.enums.SexEnum;
 import haihuang.resp.CommenResp;
 import haihuang.resp.GetMessageCodeResp;
 import haihuang.resp.MessageCode;
@@ -24,7 +23,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
 
     /**
      * 短信验证

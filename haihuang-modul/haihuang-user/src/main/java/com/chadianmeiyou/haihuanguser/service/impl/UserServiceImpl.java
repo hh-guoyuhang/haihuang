@@ -5,6 +5,8 @@ import com.chadianmeiyou.haihuanguser.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhUser;
+import haihuang.utils.CacheContents;
+import haihuang.utils.RedisConfiguration;
 import haihuang.utils.serviceUtils.UserUtil;
 import haihuang.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RedisConfiguration redisConfiguration;
     //--------------------------------------------
 
 
@@ -31,6 +35,9 @@ public class UserServiceImpl implements UserService {
         }else{
             HhUser hhUser = userDao.addUser(user);
         }
+        //添加用户到缓存
+        redisConfiguration.vos().set(CacheContents.USERKEY+user.getId().toString(),user);
+
     }
 
     @Override

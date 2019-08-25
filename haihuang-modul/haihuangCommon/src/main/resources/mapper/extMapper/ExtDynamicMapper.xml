@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="haihuang.mapper.ExtDynamicMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.resp.DynamicResp" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="dynamic_type" property="dynamicType" jdbcType="INTEGER" />
+    <result column="like_id" property="likeId" jdbcType="BIGINT" />
+    <result column="discuss_id" property="discussId" jdbcType="BIGINT" />
+    <result column="topic" property="topic" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+    <result column="photo1" property="photo1" jdbcType="VARCHAR" />
+    <result column="voice" property="voice" jdbcType="VARCHAR" />
+    <result column="video" property="video" jdbcType="VARCHAR" />
+    <result column="word" property="word" jdbcType="VARCHAR" />
+    <result column="photo2" property="photo2" jdbcType="VARCHAR" />
+    <result column="photo3" property="photo3" jdbcType="VARCHAR" />
+    <result column="photo4" property="photo4" jdbcType="VARCHAR" />
+    <result column="photo5" property="photo5" jdbcType="VARCHAR" />
+    <result column="photo6" property="photo6" jdbcType="VARCHAR" />
+    <result column="photo7" property="photo7" jdbcType="VARCHAR" />
+    <result column="photo8" property="photo8" jdbcType="VARCHAR" />
+    <result column="photo9" property="photo9" jdbcType="VARCHAR" />
+<!--      <collection property="detailsList" ofType="haihuang.bean.HhDynamicDetails" column="dynamicId">-->
+<!--        <id column="id" property="id" jdbcType="BIGINT" />-->
+<!--       &lt;!&ndash; <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />&ndash;&gt;-->
+<!--        -->
+<!--      </collection>-->
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    dynamic.id, dynamic.user_id, dynamic.dynamic_type, dynamic.like_id, dynamic.discuss_id, dynamic.topic, dynamic.area, dynamic.create_time,
+    details.dynamic_id, details.photo1, details.voice, details.video, details.word, details.photo2, details.photo3, details.photo4, details.photo5,
+    details.photo6, details.photo7, details.photo8, details.photo9
+  </sql>
+
+  <select id="selectDynamicByPage" resultMap="BaseResultMap" parameterType="haihuang.vo.DynamicVo" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM hh_dynamic dynamic,hh_dynamic_details details
+    WHERE dynamic.id = details.dynamic_id
+    <if test="id != null" >
+      AND  dynamic.id =  #{id,jdbcType=BIGINT},
+    </if>
+    <if test="userId != null" >
+      AND  dynamic.user_id =  #{userId,jdbcType=BIGINT},
+    </if>
+    <if test="dynamicType != null" >
+      AND  dynamic.dynamic_type =  #{dynamicType,jdbcType=INTEGER},
+    </if>
+    <if test="likeId != null" >
+      AND  dynamic.like_id =  #{likeId,jdbcType=BIGINT},
+    </if>
+    <if test="discussId != null" >
+      AND  dynamic.discuss_id = #{discussId,jdbcType=BIGINT},
+    </if>
+    <if test="topic != null" >
+      AND  dynamic.topic like "%"#{topic,jdbcType=VARCHAR}"%",
+    </if>
+    <if test="area != null" >
+     AND  dynamic.area = #{area,jdbcType=VARCHAR},
+    </if>
+    <if test="createTime != null" >
+     AND  dynamic.createTime = #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="photo1 != null" >
+     AND  details.photo1 = #{photo1,jdbcType=VARCHAR},
+    </if>
+    <if test="voice != null" >
+      AND  details.voice = #{voice,jdbcType=VARCHAR},
+    </if>
+    <if test="video != null" >
+      AND  details.video = #{video,jdbcType=VARCHAR},
+    </if>
+    <if test="word != null" >
+      AND  details.word = #{word,jdbcType=VARCHAR},
+    </if>
+    <if test="photo2 != null" >
+      AND  details.photo2 = #{photo2,jdbcType=VARCHAR},
+    </if>
+    <if test="photo3 != null" >
+      AND  details.photo3 = #{photo3,jdbcType=VARCHAR},
+    </if>
+    <if test="photo4 != null" >
+      AND  details.photo4 = #{photo4,jdbcType=VARCHAR},
+    </if>
+    <if test="photo5 != null" >
+      AND  details.photo5 = #{photo5,jdbcType=VARCHAR},
+    </if>
+    <if test="photo6 != null" >
+      AND  details.photo6 = #{photo6,jdbcType=VARCHAR},
+    </if>
+    <if test="photo7 != null" >
+      AND  details.photo7 = #{photo7,jdbcType=VARCHAR},
+    </if>
+    <if test="photo8 != null" >
+      AND  details.photo8 = #{photo8,jdbcType=VARCHAR},
+    </if>
+    <if test="photo9 != null" >
+      AND  details.photo9 = #{photo9,jdbcType=VARCHAR},
+    </if>
+  </select>
+
+</mapper>

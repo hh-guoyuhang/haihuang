@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="haihuang.mapper.HhDynamicDetailsMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhDynamicDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
+    <result column="photo1" property="photo1" jdbcType="VARCHAR" />
+    <result column="voice" property="voice" jdbcType="VARCHAR" />
+    <result column="video" property="video" jdbcType="VARCHAR" />
+    <result column="word" property="word" jdbcType="VARCHAR" />
+    <result column="photo2" property="photo2" jdbcType="VARCHAR" />
+    <result column="photo3" property="photo3" jdbcType="VARCHAR" />
+    <result column="photo4" property="photo4" jdbcType="VARCHAR" />
+    <result column="photo5" property="photo5" jdbcType="VARCHAR" />
+    <result column="photo6" property="photo6" jdbcType="VARCHAR" />
+    <result column="photo7" property="photo7" jdbcType="VARCHAR" />
+    <result column="photo8" property="photo8" jdbcType="VARCHAR" />
+    <result column="photo9" property="photo9" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dynamic_id, photo1, voice, video, word, photo2, photo3, photo4, photo5, photo6, 
+    photo7, photo8, photo9
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhDynamicDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hh_dynamic_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_dynamic_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_dynamic_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhDynamicDetailsExample" >
+    delete from hh_dynamic_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhDynamicDetails" useGeneratedKeys="true" keyProperty="id">
+    insert into hh_dynamic_details (id, dynamic_id, photo1, 
+      voice, video, word, 
+      photo2, photo3, photo4, 
+      photo5, photo6, photo7, 
+      photo8, photo9)
+    values (#{id,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, #{photo1,jdbcType=VARCHAR}, 
+      #{voice,jdbcType=VARCHAR}, #{video,jdbcType=VARCHAR}, #{word,jdbcType=VARCHAR}, 
+      #{photo2,jdbcType=VARCHAR}, #{photo3,jdbcType=VARCHAR}, #{photo4,jdbcType=VARCHAR}, 
+      #{photo5,jdbcType=VARCHAR}, #{photo6,jdbcType=VARCHAR}, #{photo7,jdbcType=VARCHAR}, 
+      #{photo8,jdbcType=VARCHAR}, #{photo9,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhDynamicDetails" >
+    insert into hh_dynamic_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dynamicId != null" >
+        dynamic_id,
+      </if>
+      <if test="photo1 != null" >
+        photo1,
+      </if>
+      <if test="voice != null" >
+        voice,
+      </if>
+      <if test="video != null" >
+        video,
+      </if>
+      <if test="word != null" >
+        word,
+      </if>
+      <if test="photo2 != null" >
+        photo2,
+      </if>
+      <if test="photo3 != null" >
+        photo3,
+      </if>
+      <if test="photo4 != null" >
+        photo4,
+      </if>
+      <if test="photo5 != null" >
+        photo5,
+      </if>
+      <if test="photo6 != null" >
+        photo6,
+      </if>
+      <if test="photo7 != null" >
+        photo7,
+      </if>
+      <if test="photo8 != null" >
+        photo8,
+      </if>
+      <if test="photo9 != null" >
+        photo9,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dynamicId != null" >
+        #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="photo1 != null" >
+        #{photo1,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null" >
+        #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null" >
+        #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="photo2 != null" >
+        #{photo2,jdbcType=VARCHAR},
+      </if>
+      <if test="photo3 != null" >
+        #{photo3,jdbcType=VARCHAR},
+      </if>
+      <if test="photo4 != null" >
+        #{photo4,jdbcType=VARCHAR},
+      </if>
+      <if test="photo5 != null" >
+        #{photo5,jdbcType=VARCHAR},
+      </if>
+      <if test="photo6 != null" >
+        #{photo6,jdbcType=VARCHAR},
+      </if>
+      <if test="photo7 != null" >
+        #{photo7,jdbcType=VARCHAR},
+      </if>
+      <if test="photo8 != null" >
+        #{photo8,jdbcType=VARCHAR},
+      </if>
+      <if test="photo9 != null" >
+        #{photo9,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhDynamicDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from hh_dynamic_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_dynamic_details
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.dynamicId != null" >
+        dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.photo1 != null" >
+        photo1 = #{record.photo1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voice != null" >
+        voice = #{record.voice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.video != null" >
+        video = #{record.video,jdbcType=VARCHAR},
+      </if>
+      <if test="record.word != null" >
+        word = #{record.word,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo2 != null" >
+        photo2 = #{record.photo2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo3 != null" >
+        photo3 = #{record.photo3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo4 != null" >
+        photo4 = #{record.photo4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo5 != null" >
+        photo5 = #{record.photo5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo6 != null" >
+        photo6 = #{record.photo6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo7 != null" >
+        photo7 = #{record.photo7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo8 != null" >
+        photo8 = #{record.photo8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo9 != null" >
+        photo9 = #{record.photo9,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_dynamic_details
+    set id = #{record.id,jdbcType=BIGINT},
+      dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      photo1 = #{record.photo1,jdbcType=VARCHAR},
+      voice = #{record.voice,jdbcType=VARCHAR},
+      video = #{record.video,jdbcType=VARCHAR},
+      word = #{record.word,jdbcType=VARCHAR},
+      photo2 = #{record.photo2,jdbcType=VARCHAR},
+      photo3 = #{record.photo3,jdbcType=VARCHAR},
+      photo4 = #{record.photo4,jdbcType=VARCHAR},
+      photo5 = #{record.photo5,jdbcType=VARCHAR},
+      photo6 = #{record.photo6,jdbcType=VARCHAR},
+      photo7 = #{record.photo7,jdbcType=VARCHAR},
+      photo8 = #{record.photo8,jdbcType=VARCHAR},
+      photo9 = #{record.photo9,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhDynamicDetails" >
+    update hh_dynamic_details
+    <set >
+      <if test="dynamicId != null" >
+        dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      </if>
+      <if test="photo1 != null" >
+        photo1 = #{photo1,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null" >
+        voice = #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null" >
+        video = #{video,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null" >
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="photo2 != null" >
+        photo2 = #{photo2,jdbcType=VARCHAR},
+      </if>
+      <if test="photo3 != null" >
+        photo3 = #{photo3,jdbcType=VARCHAR},
+      </if>
+      <if test="photo4 != null" >
+        photo4 = #{photo4,jdbcType=VARCHAR},
+      </if>
+      <if test="photo5 != null" >
+        photo5 = #{photo5,jdbcType=VARCHAR},
+      </if>
+      <if test="photo6 != null" >
+        photo6 = #{photo6,jdbcType=VARCHAR},
+      </if>
+      <if test="photo7 != null" >
+        photo7 = #{photo7,jdbcType=VARCHAR},
+      </if>
+      <if test="photo8 != null" >
+        photo8 = #{photo8,jdbcType=VARCHAR},
+      </if>
+      <if test="photo9 != null" >
+        photo9 = #{photo9,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhDynamicDetails" >
+    update hh_dynamic_details
+    set dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      photo1 = #{photo1,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      video = #{video,jdbcType=VARCHAR},
+      word = #{word,jdbcType=VARCHAR},
+      photo2 = #{photo2,jdbcType=VARCHAR},
+      photo3 = #{photo3,jdbcType=VARCHAR},
+      photo4 = #{photo4,jdbcType=VARCHAR},
+      photo5 = #{photo5,jdbcType=VARCHAR},
+      photo6 = #{photo6,jdbcType=VARCHAR},
+      photo7 = #{photo7,jdbcType=VARCHAR},
+      photo8 = #{photo8,jdbcType=VARCHAR},
+      photo9 = #{photo9,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

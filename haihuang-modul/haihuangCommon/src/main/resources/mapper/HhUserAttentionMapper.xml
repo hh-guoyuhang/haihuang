@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="haihuang.mapper.HhUserAttentionMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhUserAttention" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="attention_user_id" property="attentionUserId" jdbcType="BIGINT" />
+    <result column="attention_user_name" property="attentionUserName" jdbcType="VARCHAR" />
+    <result column="attention_user_photo" property="attentionUserPhoto" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="ranks" property="ranks" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, attention_user_id, attention_user_name, attention_user_photo, sex, grade, 
+    ranks, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhUserAttentionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hh_user_attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hh_user_attention
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hh_user_attention
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhUserAttentionExample" >
+    delete from hh_user_attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="haihuang.bean.HhUserAttention" >
+    insert into hh_user_attention (id, user_id, attention_user_id, 
+      attention_user_name, attention_user_photo, 
+      sex, grade, ranks, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{attentionUserId,jdbcType=BIGINT}, 
+      #{attentionUserName,jdbcType=VARCHAR}, #{attentionUserPhoto,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, #{ranks,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="haihuang.bean.HhUserAttention" >
+    insert into hh_user_attention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="attentionUserId != null" >
+        attention_user_id,
+      </if>
+      <if test="attentionUserName != null" >
+        attention_user_name,
+      </if>
+      <if test="attentionUserPhoto != null" >
+        attention_user_photo,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="ranks != null" >
+        ranks,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="attentionUserId != null" >
+        #{attentionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="attentionUserName != null" >
+        #{attentionUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionUserPhoto != null" >
+        #{attentionUserPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="ranks != null" >
+        #{ranks,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="haihuang.bean.HhUserAttentionExample" resultType="java.lang.Integer" >
+    select count(*) from hh_user_attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hh_user_attention
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attentionUserId != null" >
+        attention_user_id = #{record.attentionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attentionUserName != null" >
+        attention_user_name = #{record.attentionUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attentionUserPhoto != null" >
+        attention_user_photo = #{record.attentionUserPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+      <if test="record.ranks != null" >
+        ranks = #{record.ranks,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hh_user_attention
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      attention_user_id = #{record.attentionUserId,jdbcType=BIGINT},
+      attention_user_name = #{record.attentionUserName,jdbcType=VARCHAR},
+      attention_user_photo = #{record.attentionUserPhoto,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      grade = #{record.grade,jdbcType=INTEGER},
+      ranks = #{record.ranks,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhUserAttention" >
+    update hh_user_attention
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="attentionUserId != null" >
+        attention_user_id = #{attentionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="attentionUserName != null" >
+        attention_user_name = #{attentionUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionUserPhoto != null" >
+        attention_user_photo = #{attentionUserPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="ranks != null" >
+        ranks = #{ranks,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhUserAttention" >
+    update hh_user_attention
+    set user_id = #{userId,jdbcType=BIGINT},
+      attention_user_id = #{attentionUserId,jdbcType=BIGINT},
+      attention_user_name = #{attentionUserName,jdbcType=VARCHAR},
+      attention_user_photo = #{attentionUserPhoto,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      ranks = #{ranks,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
