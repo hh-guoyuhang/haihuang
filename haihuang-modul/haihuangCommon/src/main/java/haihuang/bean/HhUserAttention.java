@@ -3,16 +3,12 @@ package haihuang.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class HhUserAttention  implements Serializable {
+public class HhUserAttention implements Serializable {
     private Long id;
 
     private Long userId;
 
     private Long attentionUserId;
-
-    private String attentionUserName;
-
-    private String attentionUserPhoto;
 
     private Integer sex;
 
@@ -44,22 +40,6 @@ public class HhUserAttention  implements Serializable {
 
     public void setAttentionUserId(Long attentionUserId) {
         this.attentionUserId = attentionUserId;
-    }
-
-    public String getAttentionUserName() {
-        return attentionUserName;
-    }
-
-    public void setAttentionUserName(String attentionUserName) {
-        this.attentionUserName = attentionUserName == null ? null : attentionUserName.trim();
-    }
-
-    public String getAttentionUserPhoto() {
-        return attentionUserPhoto;
-    }
-
-    public void setAttentionUserPhoto(String attentionUserPhoto) {
-        this.attentionUserPhoto = attentionUserPhoto == null ? null : attentionUserPhoto.trim();
     }
 
     public Integer getSex() {

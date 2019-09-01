@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="haihuang.mapper.HhDynamicDiscussDetailsMapper" >
-  <resultMap id="BaseResultMap" type="haihuang.bean.HhDynamicDiscussDetails" >
+<mapper namespace="haihuang.mapper.HhDynamicTopicMapper" >
+  <resultMap id="BaseResultMap" type="haihuang.bean.HhDynamicTopic" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
-    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="count" property="count" jdbcType="BIGINT" />
+    <result column="topic" property="topic" jdbcType="VARCHAR" />
+    <result column="creatime" property="creatime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,16 +66,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, dynamic_id, discuss, create_time, parent_id
+    id, count, topic, creatime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhDynamicTopicExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hh_dynamic_discuss_details
+    from hh_dynamic_topic
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,96 +86,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from hh_dynamic_discuss_details
+    from hh_dynamic_topic
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from hh_dynamic_discuss_details
+    delete from hh_dynamic_topic
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" >
-    delete from hh_dynamic_discuss_details
+  <delete id="deleteByExample" parameterType="haihuang.bean.HhDynamicTopicExample" >
+    delete from hh_dynamic_topic
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
-    insert into hh_dynamic_discuss_details (id, user_id, dynamic_id, 
-      discuss, create_time, parent_id
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, 
-      #{discuss,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{parentId,jdbcType=BIGINT}
-      )
+  <insert id="insert" parameterType="haihuang.bean.HhDynamicTopic" >
+    insert into hh_dynamic_topic (id, count, topic, 
+      creatime)
+    values (#{id,jdbcType=BIGINT}, #{count,jdbcType=BIGINT}, #{topic,jdbcType=VARCHAR}, 
+      #{creatime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
-    insert into hh_dynamic_discuss_details
+  <insert id="insertSelective" parameterType="haihuang.bean.HhDynamicTopic" >
+    insert into hh_dynamic_topic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="userId != null" >
-        user_id,
+      <if test="count != null" >
+        count,
       </if>
-      <if test="dynamicId != null" >
-        dynamic_id,
+      <if test="topic != null" >
+        topic,
       </if>
-      <if test="discuss != null" >
-        discuss,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="parentId != null" >
-        parent_id,
+      <if test="creatime != null" >
+        creatime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+      <if test="count != null" >
+        #{count,jdbcType=BIGINT},
       </if>
-      <if test="dynamicId != null" >
-        #{dynamicId,jdbcType=BIGINT},
+      <if test="topic != null" >
+        #{topic,jdbcType=VARCHAR},
       </if>
-      <if test="discuss != null" >
-        #{discuss,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=BIGINT},
+      <if test="creatime != null" >
+        #{creatime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="haihuang.bean.HhDynamicDiscussDetailsExample" resultType="java.lang.Integer" >
-    select count(*) from hh_dynamic_discuss_details
+  <select id="countByExample" parameterType="haihuang.bean.HhDynamicTopicExample" resultType="java.lang.Integer" >
+    select count(*) from hh_dynamic_topic
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update hh_dynamic_discuss_details
+    update hh_dynamic_topic
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=BIGINT},
       </if>
-      <if test="record.dynamicId != null" >
-        dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
+      <if test="record.topic != null" >
+        topic = #{record.topic,jdbcType=VARCHAR},
       </if>
-      <if test="record.discuss != null" >
-        discuss = #{record.discuss,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.parentId != null" >
-        parent_id = #{record.parentId,jdbcType=BIGINT},
+      <if test="record.creatime != null" >
+        creatime = #{record.creatime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -185,45 +163,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update hh_dynamic_discuss_details
+    update hh_dynamic_topic
     set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
-      discuss = #{record.discuss,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      parent_id = #{record.parentId,jdbcType=BIGINT}
+      count = #{record.count,jdbcType=BIGINT},
+      topic = #{record.topic,jdbcType=VARCHAR},
+      creatime = #{record.creatime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
-    update hh_dynamic_discuss_details
+  <update id="updateByPrimaryKeySelective" parameterType="haihuang.bean.HhDynamicTopic" >
+    update hh_dynamic_topic
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="count != null" >
+        count = #{count,jdbcType=BIGINT},
       </if>
-      <if test="dynamicId != null" >
-        dynamic_id = #{dynamicId,jdbcType=BIGINT},
+      <if test="topic != null" >
+        topic = #{topic,jdbcType=VARCHAR},
       </if>
-      <if test="discuss != null" >
-        discuss = #{discuss,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=BIGINT},
+      <if test="creatime != null" >
+        creatime = #{creatime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhDynamicDiscussDetails" >
-    update hh_dynamic_discuss_details
-    set user_id = #{userId,jdbcType=BIGINT},
-      dynamic_id = #{dynamicId,jdbcType=BIGINT},
-      discuss = #{discuss,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      parent_id = #{parentId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="haihuang.bean.HhDynamicTopic" >
+    update hh_dynamic_topic
+    set count = #{count,jdbcType=BIGINT},
+      topic = #{topic,jdbcType=VARCHAR},
+      creatime = #{creatime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

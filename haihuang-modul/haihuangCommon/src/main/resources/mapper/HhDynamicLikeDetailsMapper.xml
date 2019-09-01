@@ -5,8 +5,6 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="dynamic_id" property="dynamicId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, dynamic_id, user_id, user_name, user_photo, create_time
+    id, dynamic_id, user_id, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhDynamicLikeDetailsExample" >
     select
@@ -103,11 +101,9 @@
   </delete>
   <insert id="insert" parameterType="haihuang.bean.HhDynamicLikeDetails" >
     insert into hh_dynamic_like_details (id, dynamic_id, user_id, 
-      user_name, user_photo, create_time
-      )
+      create_time)
     values (#{id,jdbcType=BIGINT}, #{dynamicId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
-      #{userName,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="haihuang.bean.HhDynamicLikeDetails" >
     insert into hh_dynamic_like_details
@@ -120,12 +116,6 @@
       </if>
       <if test="userId != null" >
         user_id,
-      </if>
-      <if test="userName != null" >
-        user_name,
-      </if>
-      <if test="userPhoto != null" >
-        user_photo,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -140,12 +130,6 @@
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhoto != null" >
-        #{userPhoto,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -170,12 +154,6 @@
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userPhoto != null" >
-        user_photo = #{record.userPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -189,8 +167,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       dynamic_id = #{record.dynamicId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      user_photo = #{record.userPhoto,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -205,12 +181,6 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhoto != null" >
-        user_photo = #{userPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -221,8 +191,6 @@
     update hh_dynamic_like_details
     set dynamic_id = #{dynamicId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
-      user_name = #{userName,jdbcType=VARCHAR},
-      user_photo = #{userPhoto,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

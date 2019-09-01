@@ -10,10 +10,6 @@ public class HhUserBlack implements Serializable {
 
     private Long blackUserId;
 
-    private String blackUserName;
-
-    private String blackUserPhoto;
-
     private Date createTime;
 
     public Long getId() {
@@ -38,22 +34,6 @@ public class HhUserBlack implements Serializable {
 
     public void setBlackUserId(Long blackUserId) {
         this.blackUserId = blackUserId;
-    }
-
-    public String getBlackUserName() {
-        return blackUserName;
-    }
-
-    public void setBlackUserName(String blackUserName) {
-        this.blackUserName = blackUserName == null ? null : blackUserName.trim();
-    }
-
-    public String getBlackUserPhoto() {
-        return blackUserPhoto;
-    }
-
-    public void setBlackUserPhoto(String blackUserPhoto) {
-        this.blackUserPhoto = blackUserPhoto == null ? null : blackUserPhoto.trim();
     }
 
     public Date getCreateTime() {

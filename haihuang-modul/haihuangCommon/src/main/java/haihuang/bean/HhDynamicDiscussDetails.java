@@ -10,10 +10,6 @@ public class HhDynamicDiscussDetails implements Serializable {
 
     private Long dynamicId;
 
-    private String userName;
-
-    private String userPhoto;
-
     private String discuss;
 
     private Date createTime;
@@ -42,22 +38,6 @@ public class HhDynamicDiscussDetails implements Serializable {
 
     public void setDynamicId(Long dynamicId) {
         this.dynamicId = dynamicId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getUserPhoto() {
-        return userPhoto;
-    }
-
-    public void setUserPhoto(String userPhoto) {
-        this.userPhoto = userPhoto == null ? null : userPhoto.trim();
     }
 
     public String getDiscuss() {

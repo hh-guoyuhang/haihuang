@@ -5,22 +5,21 @@ import com.chadianmeiyou.haihuanguser.service.DynamicService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
-import haihuang.bean.HhDynamic;
-import haihuang.bean.HhDynamicDetails;
-import haihuang.bean.HhDynamicLikeDetails;
+import haihuang.bean.*;
 import haihuang.enums.DynamicTypeEnum;
 import haihuang.enums.MathNumberEnum;
-import haihuang.resp.CommenResp;
-import haihuang.resp.DynamicResp;
-import haihuang.resp.UploadDownloadResp;
+import haihuang.resp.*;
 import haihuang.tools.UploadDownload;
 import haihuang.utils.ClassUtils;
 import haihuang.utils.serviceUtils.DynamicUtil;
 import haihuang.vo.DynamicLikeDiscussVo;
+import haihuang.vo.DynamicTopicVo;
 import haihuang.vo.DynamicVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Component
 public class DynamicServiceImpl implements DynamicService {
@@ -68,7 +67,9 @@ public class DynamicServiceImpl implements DynamicService {
         dynamicDao.saveDynamic(hhDynamic);
         hhDynamicDetails.setDynamicId(hhDynamic.getId());
         dynamicDao.saveDynamicDetails(hhDynamicDetails);
-
+        HhDynamicTopic hhDynamicTopic = new HhDynamicTopic();
+        hhDynamicTopic.setTopic(hhDynamic.getTopic());
+        dynamicDao.insertDynamicTopic(hhDynamicTopic);
 
     }
 
@@ -85,9 +86,79 @@ public class DynamicServiceImpl implements DynamicService {
     }
 
     @Override
+    public DynamicLikeDetailsResp queryDynamicLike(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDynamicLikeDetails dynamicLikeDetails = DynamicUtil.createHhDynamicLike(dynamicLikeDiscussVo);
+        DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
+        List<HhDynamicLikeDetails> list = dynamicDao.queryDynamicLike(dynamicLikeDetails);
+        resp.setRespList(list);
+        resp.setCount(list.size());
+        return resp;
+    }
+
+    @Override
     public void saveDynamicLike(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
         HhDynamicLikeDetails dynamicLikeDetails = DynamicUtil.createHhDynamicLike(dynamicLikeDiscussVo);
         dynamicDao.saveDynamicLike(dynamicLikeDetails);
+    }
+
+    @Override
+    public void saveDynamicDiscuss(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDynamicDiscussDetails dynamicDiscussDetails = DynamicUtil.createHhDynamicDiscuss(dynamicLikeDiscussVo);
+        dynamicDao.saveDynamicDiscuss(dynamicDiscussDetails);
+    }
+
+    @Override
+    public DynamicLikeDetailsResp queryDynamicDiscussOne(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDynamicDiscussDetails dynamicDiscussDetails = DynamicUtil.createHhDynamicDiscuss(dynamicLikeDiscussVo);
+        DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
+        List<HhDynamicDiscussDetails> list = dynamicDao.queryDynamicDiscussOne(dynamicDiscussDetails);
+        resp.setRespList(list);
+        resp.setCount(list.size());
+        return resp;
+    }
+
+    @Override
+    public DynamicLikeDetailsResp queryDynamicDiscussTwo(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDynamicDiscussDetails dynamicDiscussDetails = DynamicUtil.createHhDynamicDiscuss(dynamicLikeDiscussVo);
+        DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
+        List<HhDynamicDiscussDetails> list = dynamicDao.queryDynamicDiscussTwo(dynamicDiscussDetails);
+        resp.setRespList(list);
+        resp.setCount(list.size());
+        return resp;
+    }
+
+    @Override
+    public void saveDiscussLike(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDiscussLikeDetails dynamicDiscussDetails = DynamicUtil.createHhDiscussLike(dynamicLikeDiscussVo);
+        dynamicDao.saveDiscussLike(dynamicDiscussDetails);
+    }
+
+    @Override
+    public DynamicLikeDetailsResp queryDiscussLike(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        HhDiscussLikeDetails dynamicDiscussDetails = DynamicUtil.createHhDiscussLike(dynamicLikeDiscussVo);
+        DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
+        List<HhDiscussLikeDetails> list = dynamicDao.queryDiscussLike(dynamicDiscussDetails);
+        resp.setRespList(list);
+        resp.setCount(list.size());
+        return resp;
+    }
+
+    @Override
+    public List<DynamicTopicResp> queryDynamicTopic(DynamicTopicVo dynamicTopicVo) {
+        HhDynamicTopic hhDynamicTopic = DynamicUtil.createDynamicTopicByVo(dynamicTopicVo);
+        List<HhDynamicTopic> hhDynamicTopicResp = dynamicDao.queryDynamicTopic(hhDynamicTopic);
+        List<DynamicTopicResp> resp = DynamicUtil.createDynamicTopicRespByEntityList(hhDynamicTopicResp);
+        return resp;
+    }
+
+    @Override
+    public void editDynamicTopic(DynamicTopicVo dynamicTopicVo) {
+        HhDynamicTopic hhDynamicTopic = DynamicUtil.createDynamicTopicByVo(dynamicTopicVo);
+        if(null != dynamicTopicVo.getId()){
+            dynamicDao.updateDynamicTopic(hhDynamicTopic);
+        }else{
+            dynamicDao.saveeDynamicTopic(hhDynamicTopic);
+        }
     }
 
 

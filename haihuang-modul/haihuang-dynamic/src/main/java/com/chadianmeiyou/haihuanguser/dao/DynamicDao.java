@@ -2,11 +2,11 @@ package com.chadianmeiyou.haihuanguser.dao;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import haihuang.bean.HhDynamic;
-import haihuang.bean.HhDynamicDetails;
-import haihuang.bean.HhDynamicLikeDetails;
+import haihuang.bean.*;
 import haihuang.resp.DynamicResp;
 import haihuang.vo.DynamicVo;
+
+import java.util.List;
 
 public interface DynamicDao {
     /**
@@ -25,4 +25,24 @@ public interface DynamicDao {
     public PageInfo<DynamicResp> selectDynamicByPage(DynamicVo dynamicVo, Page page);
 
     public void saveDynamicLike(HhDynamicLikeDetails dynamicLikeDiscussVo);
+
+    public void saveDynamicDiscuss(HhDynamicDiscussDetails dynamicDiscussDetails);
+
+    public void saveDiscussLike(HhDiscussLikeDetails dynamicDiscussDetails);
+
+    public List<HhDynamicLikeDetails> queryDynamicLike(HhDynamicLikeDetails dynamicLikeDiscussVo);
+
+    public List<HhDynamicDiscussDetails> queryDynamicDiscussOne(HhDynamicDiscussDetails dynamicDiscussDetails);
+
+    public List<HhDynamicDiscussDetails> queryDynamicDiscussTwo(HhDynamicDiscussDetails dynamicDiscussDetails);
+
+    public List<HhDiscussLikeDetails> queryDiscussLike(HhDiscussLikeDetails dynamicDiscussDetails);
+
+    public List<HhDynamicTopic> queryDynamicTopic(HhDynamicTopic hhDynamicTopic);
+
+    public void saveeDynamicTopic(HhDynamicTopic hhDynamicTopic);
+
+    public void updateDynamicTopic(HhDynamicTopic hhDynamicTopic);
+
+    public void insertDynamicTopic(HhDynamicTopic hhDynamicTopic);
 }

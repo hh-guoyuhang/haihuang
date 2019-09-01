@@ -5,8 +5,6 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="black_user_id" property="blackUserId" jdbcType="BIGINT" />
-    <result column="black_user_name" property="blackUserName" jdbcType="VARCHAR" />
-    <result column="black_user_photo" property="blackUserPhoto" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, black_user_id, black_user_name, black_user_photo, create_time
+    id, user_id, black_user_id, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="haihuang.bean.HhUserBlackExample" >
     select
@@ -103,11 +101,9 @@
   </delete>
   <insert id="insert" parameterType="haihuang.bean.HhUserBlack" >
     insert into hh_user_black (id, user_id, black_user_id, 
-      black_user_name, black_user_photo, create_time
-      )
+      create_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{blackUserId,jdbcType=BIGINT}, 
-      #{blackUserName,jdbcType=VARCHAR}, #{blackUserPhoto,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="haihuang.bean.HhUserBlack" >
     insert into hh_user_black
@@ -120,12 +116,6 @@
       </if>
       <if test="blackUserId != null" >
         black_user_id,
-      </if>
-      <if test="blackUserName != null" >
-        black_user_name,
-      </if>
-      <if test="blackUserPhoto != null" >
-        black_user_photo,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -140,12 +130,6 @@
       </if>
       <if test="blackUserId != null" >
         #{blackUserId,jdbcType=BIGINT},
-      </if>
-      <if test="blackUserName != null" >
-        #{blackUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="blackUserPhoto != null" >
-        #{blackUserPhoto,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -170,12 +154,6 @@
       <if test="record.blackUserId != null" >
         black_user_id = #{record.blackUserId,jdbcType=BIGINT},
       </if>
-      <if test="record.blackUserName != null" >
-        black_user_name = #{record.blackUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.blackUserPhoto != null" >
-        black_user_photo = #{record.blackUserPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -189,8 +167,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       black_user_id = #{record.blackUserId,jdbcType=BIGINT},
-      black_user_name = #{record.blackUserName,jdbcType=VARCHAR},
-      black_user_photo = #{record.blackUserPhoto,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -205,12 +181,6 @@
       <if test="blackUserId != null" >
         black_user_id = #{blackUserId,jdbcType=BIGINT},
       </if>
-      <if test="blackUserName != null" >
-        black_user_name = #{blackUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="blackUserPhoto != null" >
-        black_user_photo = #{blackUserPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -221,8 +191,6 @@
     update hh_user_black
     set user_id = #{userId,jdbcType=BIGINT},
       black_user_id = #{blackUserId,jdbcType=BIGINT},
-      black_user_name = #{blackUserName,jdbcType=VARCHAR},
-      black_user_photo = #{blackUserPhoto,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

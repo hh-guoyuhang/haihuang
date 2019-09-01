@@ -1,10 +1,10 @@
 package haihuang.utils.serviceUtils;
 
 import com.github.pagehelper.PageInfo;
-import haihuang.bean.HhDynamic;
-import haihuang.bean.HhDynamicLikeDetails;
-import haihuang.bean.HhUser;
+import haihuang.bean.*;
+import haihuang.resp.DynamicTopicResp;
 import haihuang.vo.DynamicLikeDiscussVo;
+import haihuang.vo.DynamicTopicVo;
 import haihuang.vo.DynamicVo;
 import haihuang.vo.UserVo;
 import org.springframework.beans.BeanUtils;
@@ -52,5 +52,60 @@ public class DynamicUtil implements Serializable {
         dynamicLikeDetails.setUserId(dynamicLikeDiscussVo.getUserId());
         dynamicLikeDetails.setCreateTime(new Date());
         return dynamicLikeDetails;
+    }
+
+    public static HhDynamicDiscussDetails createHhDynamicDiscuss(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        if(null == dynamicLikeDiscussVo){
+            return null;
+        }
+        HhDynamicDiscussDetails dynamicLikeDetails = new HhDynamicDiscussDetails();
+        dynamicLikeDetails.setDynamicId(dynamicLikeDiscussVo.getDynamicId());
+        dynamicLikeDetails.setDiscuss(dynamicLikeDiscussVo.getDiscuss());
+        dynamicLikeDetails.setParentId(dynamicLikeDiscussVo.getParentId());
+        dynamicLikeDetails.setUserId(dynamicLikeDiscussVo.getUserId());
+        dynamicLikeDetails.setCreateTime(new Date());
+        return dynamicLikeDetails;
+    }
+
+    public static HhDiscussLikeDetails createHhDiscussLike(DynamicLikeDiscussVo dynamicLikeDiscussVo) {
+        if(null == dynamicLikeDiscussVo){
+            return null;
+        }
+        HhDiscussLikeDetails discussLikeDetails = new HhDiscussLikeDetails();
+        discussLikeDetails.setUserId(dynamicLikeDiscussVo.getUserId());
+        discussLikeDetails.setDiscussId(dynamicLikeDiscussVo.getDiscussId());
+        discussLikeDetails.setCreateTime(new Date());
+        return discussLikeDetails;
+    }
+
+    public static HhDynamicTopic createDynamicTopicByVo(DynamicTopicVo dynamicTopicVo) {
+        if(null == dynamicTopicVo){
+            return null;
+        }
+        HhDynamicTopic hhDynamicTopic = new HhDynamicTopic();
+        BeanUtils.copyProperties(dynamicTopicVo,hhDynamicTopic);
+        return hhDynamicTopic;
+    }
+
+    public static List<DynamicTopicResp> createDynamicTopicRespByEntityList(List<HhDynamicTopic> hhDynamicTopics) {
+        if(null == hhDynamicTopics){
+            return null;
+        }
+        List<DynamicTopicResp> dynamicTopicResps = new ArrayList<DynamicTopicResp>();
+        for (HhDynamicTopic hhDynamicTopic: hhDynamicTopics) {
+            DynamicTopicResp dynamicTopicResp = createDynamicTopicRespByEntity(hhDynamicTopic);
+            dynamicTopicResps.add(dynamicTopicResp);
+        }
+
+        return dynamicTopicResps;
+    }
+
+    private static DynamicTopicResp createDynamicTopicRespByEntity(HhDynamicTopic hhDynamicTopic) {
+        if(null == hhDynamicTopic){
+            return null;
+        }
+        DynamicTopicResp dynamicTopicResp = new DynamicTopicResp();
+        BeanUtils.copyProperties(hhDynamicTopic,dynamicTopicResp);
+        return dynamicTopicResp;
     }
 }

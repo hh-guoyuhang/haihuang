@@ -10,10 +10,6 @@ public class HhUserReport implements Serializable {
 
     private Long reportUserId;
 
-    private String reportUserName;
-
-    private String reportUserPhoto;
-
     private Long reportRoomId;
 
     private Long reportDynamicId;
@@ -42,22 +38,6 @@ public class HhUserReport implements Serializable {
 
     public void setReportUserId(Long reportUserId) {
         this.reportUserId = reportUserId;
-    }
-
-    public String getReportUserName() {
-        return reportUserName;
-    }
-
-    public void setReportUserName(String reportUserName) {
-        this.reportUserName = reportUserName == null ? null : reportUserName.trim();
-    }
-
-    public String getReportUserPhoto() {
-        return reportUserPhoto;
-    }
-
-    public void setReportUserPhoto(String reportUserPhoto) {
-        this.reportUserPhoto = reportUserPhoto == null ? null : reportUserPhoto.trim();
     }
 
     public Long getReportRoomId() {
