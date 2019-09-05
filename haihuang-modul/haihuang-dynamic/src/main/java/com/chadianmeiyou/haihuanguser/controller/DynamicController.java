@@ -43,7 +43,7 @@ public class DynamicController {
      * 新增动态
      * @return
      */
-    @RequestMapping(value = "/getMessageCode",method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(value = "/saveDynamic",method = RequestMethod.POST,produces = "application/json")
     public CommenResp saveDynamic(@RequestParam("fileName") MultipartFile[] files,DynamicVo dynamicVo){
         CommenResp resp = new CommenResp();
         try{

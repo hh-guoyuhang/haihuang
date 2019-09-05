@@ -10,6 +10,7 @@ import haihuang.resp.MessageCode;
 import haihuang.tools.GetMessageCode;
 import haihuang.vo.UserVo;
 import org.apache.log4j.Logger;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +46,7 @@ public class UserController {
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
-            resp.setMsg(e.getMessage());
+            resp.setMsg("网络异常");
         }
         return resp;
     }
@@ -62,7 +63,11 @@ public class UserController {
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
-            resp.setMsg(e.getMessage());
+            if(e instanceof ServiceException){
+                resp.setMsg(e.getMessage());
+            }else{
+                resp.setMsg("网络异常");
+            }
         }
         return resp;
     }
@@ -82,7 +87,11 @@ public class UserController {
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
-            resp.setMsg(e.getMessage());
+            if(e instanceof ServiceException){
+                resp.setMsg(e.getMessage());
+            }else{
+                resp.setMsg("网络异常");
+            }
         }
         return resp;
     }
@@ -101,7 +110,7 @@ public class UserController {
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
-            resp.setMsg(e.getMessage());
+            resp.setMsg("网络异常");
         }
         return resp;
     }
@@ -120,7 +129,7 @@ public class UserController {
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
-            resp.setMsg(e.getMessage());
+            resp.setMsg("网络异常");
         }
         return resp;
     }

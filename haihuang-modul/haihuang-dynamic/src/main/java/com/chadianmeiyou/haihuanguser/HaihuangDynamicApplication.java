@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.chadianmeiyou.haihuanguser","haihuang.utils"})
 @MapperScan({"haihuang.mapper"})
