@@ -45,8 +45,8 @@ public class UserDaoImpl implements UserDao {
     public HhUser queryUserByPassWord(HhUser user) {
         HhUserExample example = new HhUserExample();
         HhUserExample.Criteria criteria = example.createCriteria();
-        if("0".equals(user.getLoginMethod())){
-            if (StringUtils.isEmpty(user.getMobilePhone())){
+        if(0 == user.getLoginMethod()){
+            if (!StringUtils.isEmpty(user.getMobilePhone())){
                 criteria.andMobilePhoneEqualTo(user.getMobilePhone());
             }
         }else{

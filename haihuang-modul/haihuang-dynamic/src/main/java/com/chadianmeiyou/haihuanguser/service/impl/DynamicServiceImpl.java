@@ -10,11 +10,15 @@ import haihuang.enums.DynamicTypeEnum;
 import haihuang.enums.MathNumberEnum;
 import haihuang.resp.*;
 import haihuang.tools.UploadDownload;
+import haihuang.utils.CacheContents;
 import haihuang.utils.ClassUtils;
+import haihuang.utils.RedisConfiguration;
 import haihuang.utils.serviceUtils.DynamicUtil;
+import haihuang.utils.serviceUtils.UserUtil;
 import haihuang.vo.DynamicLikeDiscussVo;
 import haihuang.vo.DynamicTopicVo;
 import haihuang.vo.DynamicVo;
+import haihuang.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +30,8 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Autowired
     private DynamicDao dynamicDao;
-
+    @Autowired
+    private RedisConfiguration redisConfiguration;
     @Override
     public void saveDynamic(MultipartFile[] files, DynamicVo dynamicVo) throws Exception {
 
@@ -82,6 +87,12 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public PageInfo<DynamicResp> queryDynamicList(DynamicVo dynamicVo, Page page) {
         PageInfo<DynamicResp> userResp = dynamicDao.selectDynamicByPage(dynamicVo,page);
+        List<DynamicResp> list = userResp.getList();
+        for (DynamicResp resp :list){
+            HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY+resp.getUserId().toString());
+            UserVo respvo = UserUtil.createHhUserToUserVo(user);
+            resp.setUserVo(respvo);
+        }
         return userResp;
     }
 
@@ -90,8 +101,16 @@ public class DynamicServiceImpl implements DynamicService {
         HhDynamicLikeDetails dynamicLikeDetails = DynamicUtil.createHhDynamicLike(dynamicLikeDiscussVo);
         DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
         List<HhDynamicLikeDetails> list = dynamicDao.queryDynamicLike(dynamicLikeDetails);
-        resp.setRespList(list);
-        resp.setCount(list.size());
+        if(null != list){
+            for (HhDynamicLikeDetails details :list){
+                HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY+details.getUserId().toString());
+                UserVo respvo = UserUtil.createHhUserToUserVo(user);
+                details.setUserVo(respvo);
+            }
+            resp.setRespList(list);
+            resp.setCount(list.size());
+
+        }
         return resp;
     }
 
@@ -112,8 +131,16 @@ public class DynamicServiceImpl implements DynamicService {
         HhDynamicDiscussDetails dynamicDiscussDetails = DynamicUtil.createHhDynamicDiscuss(dynamicLikeDiscussVo);
         DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
         List<HhDynamicDiscussDetails> list = dynamicDao.queryDynamicDiscussOne(dynamicDiscussDetails);
-        resp.setRespList(list);
-        resp.setCount(list.size());
+        if(null != list){
+            for (HhDynamicDiscussDetails details :list){
+                HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY+details.getUserId().toString());
+                UserVo respvo = UserUtil.createHhUserToUserVo(user);
+                details.setUserVo(respvo);
+            }
+            resp.setRespList(list);
+            resp.setCount(list.size());
+
+        }
         return resp;
     }
 
@@ -122,8 +149,16 @@ public class DynamicServiceImpl implements DynamicService {
         HhDynamicDiscussDetails dynamicDiscussDetails = DynamicUtil.createHhDynamicDiscuss(dynamicLikeDiscussVo);
         DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
         List<HhDynamicDiscussDetails> list = dynamicDao.queryDynamicDiscussTwo(dynamicDiscussDetails);
-        resp.setRespList(list);
-        resp.setCount(list.size());
+        if(null != list){
+            for (HhDynamicDiscussDetails details :list){
+                HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY+details.getUserId().toString());
+                UserVo respvo = UserUtil.createHhUserToUserVo(user);
+                details.setUserVo(respvo);
+            }
+            resp.setRespList(list);
+            resp.setCount(list.size());
+
+        }
         return resp;
     }
 
@@ -138,8 +173,16 @@ public class DynamicServiceImpl implements DynamicService {
         HhDiscussLikeDetails dynamicDiscussDetails = DynamicUtil.createHhDiscussLike(dynamicLikeDiscussVo);
         DynamicLikeDetailsResp resp = new DynamicLikeDetailsResp();
         List<HhDiscussLikeDetails> list = dynamicDao.queryDiscussLike(dynamicDiscussDetails);
-        resp.setRespList(list);
-        resp.setCount(list.size());
+        if(null != list){
+            for (HhDiscussLikeDetails details :list){
+                HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY+details.getUserId().toString());
+                UserVo respvo = UserUtil.createHhUserToUserVo(user);
+                details.setUserVo(respvo);
+            }
+            resp.setRespList(list);
+            resp.setCount(list.size());
+
+        }
         return resp;
     }
 

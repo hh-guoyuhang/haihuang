@@ -1,5 +1,7 @@
 package haihuang.bean;
 
+import haihuang.vo.UserVo;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +17,8 @@ public class HhDynamicDiscussDetails implements Serializable {
     private Date createTime;
 
     private Long parentId;
+
+    private UserVo userVo;
 
     public Long getId() {
         return id;
@@ -62,5 +66,13 @@ public class HhDynamicDiscussDetails implements Serializable {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public UserVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
     }
 }

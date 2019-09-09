@@ -32,8 +32,7 @@ public class DynamicController {
 
     @Autowired
     private DynamicService dynamicService;
-    @Autowired
-    private RedisConfiguration redisConfiguration;
+
     @RequestMapping("/index")
     public String index()
     {
@@ -110,7 +109,6 @@ public class DynamicController {
     public CommenResp saveDynamicLike(DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp resp = new CommenResp();
         try{
-            //HhUser user = (HhUser) redisConfiguration.vos().get(CacheContents.USERKEY + dynamicLikeDiscussVo.getUserId());
             dynamicService.saveDynamicLike(dynamicLikeDiscussVo);
         }catch(Exception e){
             e.printStackTrace();

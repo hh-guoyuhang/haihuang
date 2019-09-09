@@ -1,6 +1,7 @@
 package haihuang.resp;
 
 import haihuang.bean.HhDynamicDetails;
+import haihuang.vo.UserVo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -46,6 +47,8 @@ public class DynamicResp implements Serializable {
     private String photo8;
 
     private String photo9;
+
+    private UserVo userVo;
 
     public Long getId() {
         return id;
@@ -205,5 +208,13 @@ public class DynamicResp implements Serializable {
 
     public void setPhoto9(String photo9) {
         this.photo9 = photo9;
+    }
+
+    public UserVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
     }
 }
