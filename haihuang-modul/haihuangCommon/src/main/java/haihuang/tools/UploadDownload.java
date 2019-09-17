@@ -16,6 +16,8 @@ import java.util.List;
 
 public class UploadDownload {
 
+    private static final String PATH = "/root/haihuang/picture/image/";
+
     public static CommenResp<UploadDownloadResp> uploadFile(@RequestParam("fileName") MultipartFile file) {
         CommenResp<UploadDownloadResp> commonResp = new CommenResp<UploadDownloadResp>();
         UploadDownloadResp resp = new UploadDownloadResp();
@@ -26,10 +28,13 @@ public class UploadDownload {
             return commonResp;
         }
         try {
-            //String fileName = file.getOriginalFilename();
-            String fileName = UUID16.getUUID();
+            String suffix = null;//后缀
+            String orgFileName = file.getOriginalFilename();
+            suffix = orgFileName.split("\\.")[1];
+            String fileName = UUID16.getUUID();//文件名
             //加个时间戳，尽量避免文件名称重复
-            String path = "D:/" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
+            fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
+            String path = PATH +fileName +"."+suffix;
             File dest = new File(path);
 
             //判断文件是否已经存在
@@ -45,7 +50,7 @@ public class UploadDownload {
             }
 
             file.transferTo(dest); //保存文件
-            resp.setName(fileName);
+            resp.setName(fileName+"."+suffix);
             resp.setUrl(path);
         } catch (IOException e) {
             e.printStackTrace();

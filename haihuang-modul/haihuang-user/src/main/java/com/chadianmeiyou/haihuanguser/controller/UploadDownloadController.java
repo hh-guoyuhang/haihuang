@@ -7,6 +7,7 @@ import haihuang.resp.UploadDownloadResp;
 import haihuang.tools.UploadDownload;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,7 +56,7 @@ public class UploadDownloadController {
      */
     @RequestMapping("/uploadMultifile")
     @ResponseBody
-    public  CommenResp<List<UploadDownloadResp>> keywordSubmitFile(@RequestParam("fileName") List<MultipartFile> files) {
+    public  CommenResp<List<UploadDownloadResp>> uploadMultifile(@RequestParam("fileName") List<MultipartFile> files) {
         CommenResp<List<UploadDownloadResp>> resp = new CommenResp<List<UploadDownloadResp>>();
         List<UploadDownloadResp> respList = new ArrayList<UploadDownloadResp>();
         for (MultipartFile file : files) {

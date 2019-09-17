@@ -16,10 +16,7 @@ import haihuang.vo.DynamicVo;
 import org.apache.log4j.Logger;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,7 +29,8 @@ public class DynamicController {
 
     @Autowired
     private DynamicService dynamicService;
-
+    @Autowired
+    private RedisConfiguration redisConfiguration;
     @RequestMapping("/index")
     public String index()
     {
@@ -43,7 +41,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/saveDynamic",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp saveDynamic(@RequestParam("fileName") MultipartFile[] files,DynamicVo dynamicVo){
+    public CommenResp saveDynamic(@RequestParam("fileName") MultipartFile[] files,@RequestBody DynamicVo dynamicVo){
         CommenResp resp = new CommenResp();
         try{
             dynamicService.saveDynamic(files,dynamicVo);
@@ -63,7 +61,7 @@ public class DynamicController {
      */
     @RequestMapping(value = "/getDynamicList",method = RequestMethod.POST,produces = "application/json")
     //@RequestMapping(value = "/queryDynamicList",method = RequestMethod.GET)
-    public CommenResp getDynamicList(DynamicVo dynamicVo,Page page){
+    public CommenResp getDynamicList(@RequestBody DynamicVo dynamicVo,@RequestBody Page page){
         CommenResp<PageInfo<DynamicResp>> resp = new CommenResp<PageInfo<DynamicResp>>();
         try{
             page.setPageNum(1);
@@ -85,7 +83,7 @@ public class DynamicController {
      */
     @RequestMapping(value = "/queryDynamicList",method = RequestMethod.POST,produces = "application/json")
     //@RequestMapping(value = "/queryDynamicList",method = RequestMethod.GET)
-    public CommenResp queryDynamicList(DynamicVo dynamicVo,Page page){
+    public CommenResp queryDynamicList(@RequestBody DynamicVo dynamicVo,@RequestBody Page page){
         CommenResp<PageInfo<DynamicResp>> resp = new CommenResp<PageInfo<DynamicResp>>();
         try{
             page.setPageNum(1);
@@ -106,7 +104,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/saveDynamicLike",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp saveDynamicLike(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp saveDynamicLike(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp resp = new CommenResp();
         try{
             dynamicService.saveDynamicLike(dynamicLikeDiscussVo);
@@ -123,7 +121,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/queryDynamicLike",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp queryDynamicLike(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp queryDynamicLike(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp<DynamicLikeDetailsResp> resp = new CommenResp<DynamicLikeDetailsResp>();
         try{
             if(0 == dynamicLikeDiscussVo.getDynamicId()){
@@ -146,7 +144,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/saveDynamicDiscuss",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp saveDynamicDiscuss(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp saveDynamicDiscuss(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp resp = new CommenResp();
         try{
             dynamicService.saveDynamicDiscuss(dynamicLikeDiscussVo);
@@ -164,7 +162,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/queryDynamicDiscussOne",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp queryDynamicDiscussOne(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp queryDynamicDiscussOne(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp resp = new CommenResp();
         try{
             if(0 == dynamicLikeDiscussVo.getDynamicId()){
@@ -187,7 +185,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/queryDynamicDiscussTwo",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp queryDynamicDiscussTwo(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp queryDynamicDiscussTwo(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp<DynamicLikeDetailsResp> resp = new CommenResp<DynamicLikeDetailsResp>();
         try{
             if(0 == dynamicLikeDiscussVo.getDynamicId()){
@@ -216,7 +214,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/saveDiscussLike",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp saveDiscussLike(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp saveDiscussLike(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp resp = new CommenResp();
         try{
             dynamicService.saveDiscussLike(dynamicLikeDiscussVo);
@@ -233,7 +231,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/queryDiscussLike",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp queryDiscussLike(DynamicLikeDiscussVo dynamicLikeDiscussVo){
+    public CommenResp queryDiscussLike(@RequestBody DynamicLikeDiscussVo dynamicLikeDiscussVo){
         CommenResp<DynamicLikeDetailsResp> resp = new CommenResp<DynamicLikeDetailsResp>();
         try{
             if(0 == dynamicLikeDiscussVo.getDiscussId()){
@@ -258,7 +256,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/queryDynamicTopic",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp queryDynamicTopic(DynamicTopicVo dynamicTopicVo){
+    public CommenResp queryDynamicTopic(@RequestBody DynamicTopicVo dynamicTopicVo){
         CommenResp<List<DynamicTopicResp>> resp = new CommenResp<List<DynamicTopicResp>>();
         try{
             if(StringUtil.isEmpty(dynamicTopicVo.getTopic())){
@@ -280,7 +278,7 @@ public class DynamicController {
      * @return
      */
     @RequestMapping(value = "/saveDynamicTopic",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp saveDynamicTopic(DynamicTopicVo dynamicTopicVo){
+    public CommenResp saveDynamicTopic(@RequestBody DynamicTopicVo dynamicTopicVo){
         CommenResp resp = new CommenResp();
         try{
             if(StringUtil.isEmpty(dynamicTopicVo.getTopic())){

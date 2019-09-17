@@ -4,10 +4,13 @@ import com.chadianmeiyou.haihuanguser.dao.UserDao;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import haihuang.bean.HhUser;
-import haihuang.bean.HhUserExample;
+import haihuang.bean.*;
+import haihuang.mapper.HhUserAttentionMapper;
+import haihuang.mapper.HhUserBlackMapper;
 import haihuang.mapper.HhUserMapper;
+import haihuang.mapper.HhUserReportMapper;
 import haihuang.utils.mapperUtils.UserMapperUtil;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,7 +23,12 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private HhUserMapper hhUserMapper;
-
+    @Autowired
+    private HhUserAttentionMapper hhUserAttentionMapper;
+    @Autowired
+    private HhUserBlackMapper hhUserBlackMapper;
+    @Autowired
+    private HhUserReportMapper hhUserReportMapper;
     public HhUser queryUserByid(long id) {
         HhUser hhUser = hhUserMapper.selectByPrimaryKey(id);
         return hhUser;
@@ -31,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public HhUser addUser(HhUser user) {
-        hhUserMapper.insert(user);
+        hhUserMapper.insertSelective(user);
         return user;
     }
 
@@ -45,16 +53,26 @@ public class UserDaoImpl implements UserDao {
     public HhUser queryUserByPassWord(HhUser user) {
         HhUserExample example = new HhUserExample();
         HhUserExample.Criteria criteria = example.createCriteria();
-        if(0 == user.getLoginMethod()){
-            if (!StringUtils.isEmpty(user.getMobilePhone())){
-                criteria.andMobilePhoneEqualTo(user.getMobilePhone());
+        List<HhUser> hhUser = null;
+        if(null != user.getLoginMethod()){
+            if(0 == user.getLoginMethod()){
+                if (!StringUtils.isEmpty(user.getMobilePhone())){
+                    criteria.andMobilePhoneEqualTo(user.getMobilePhone());
+                }else{
+                    throw new ServiceException("电话号码必输！");
+                }
+            }else{
+                if (!StringUtils.isEmpty(user.getThirdpartyaccount())){
+                    criteria.andThirdpartyaccountEqualTo(user.getThirdpartyaccount());
+                }else{
+                    throw new ServiceException("第三方账号必输！");
+                }
             }
+            hhUser = hhUserMapper.selectByExample(example);
+
         }else{
-            if (StringUtils.isEmpty(user.getThirdpartyaccount())){
-                criteria.andThirdpartyaccountEqualTo(user.getThirdpartyaccount());
-            }
+            throw new ServiceException("登录方式必输！");
         }
-        List<HhUser> hhUser = hhUserMapper.selectByExample(example);
         if(hhUser.size() == 0){
             return null;
         }
@@ -88,4 +106,20 @@ public class UserDaoImpl implements UserDao {
         List<HhUser> hhUser = hhUserMapper.selectByExample(example);
         return hhUser;
     }
+
+    @Override
+    public void addAttention(HhUserAttention hhUserAttention) {
+        hhUserAttentionMapper.insert(hhUserAttention);
+    }
+
+    @Override
+    public void addBlack(HhUserBlack hhUserBlack) {
+        hhUserBlackMapper.insert(hhUserBlack);
+    }
+
+    @Override
+    public void addReport(HhUserReport hhUserBlack) {
+        hhUserReportMapper.insert(hhUserBlack);
+    }
+
 }

@@ -4,14 +4,18 @@ package com.chadianmeiyou.haihuanguser.controller;
 import com.chadianmeiyou.haihuanguser.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import haihuang.bean.HhUser;
 import haihuang.resp.CommenResp;
 import haihuang.resp.GetMessageCodeResp;
 import haihuang.resp.MessageCode;
 import haihuang.tools.GetMessageCode;
+import haihuang.utils.RedisConfiguration;
+import haihuang.vo.UserRelationVo;
 import haihuang.vo.UserVo;
 import org.apache.log4j.Logger;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RedisConfiguration redisConfiguration;
+
 
     /**
      * 短信验证
@@ -56,10 +63,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/editUser",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp editUser(UserVo userVo) {
-        CommenResp resp = new CommenResp();
+    public CommenResp<HhUser> editUser(@RequestBody UserVo userVo) {
+        CommenResp<HhUser> resp = new CommenResp<HhUser>();
         try{
-            userService.editUser(userVo);
+            HhUser hhUser = userService.editUser(userVo, redisConfiguration);
+            resp.setBody(hhUser);
         }catch(Exception e){
             e.printStackTrace();
             resp.setType("E");
@@ -79,7 +87,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp<UserVo> login(UserVo userVo) {
+    public CommenResp<UserVo> login(@RequestBody UserVo userVo) {
         CommenResp<UserVo> resp = new CommenResp<UserVo>();
         try{
             UserVo  usesr = userService.selectUserByLogin(userVo);
@@ -90,7 +98,7 @@ public class UserController {
             if(e instanceof ServiceException){
                 resp.setMsg(e.getMessage());
             }else{
-                resp.setMsg("网络异常");
+                resp.setMsg("网络异常!");
             }
         }
         return resp;
@@ -102,7 +110,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/queryUser",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp<UserVo> queryUser(UserVo userVo) {
+    public CommenResp<UserVo> queryUser(@RequestBody UserVo userVo) {
         CommenResp<UserVo> resp = new CommenResp<UserVo>();
         try{
             UserVo  usesr = userService.selectUserByVo(userVo);
@@ -121,7 +129,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/queryUserByPage",method = RequestMethod.POST,produces = "application/json")
-    public CommenResp<PageInfo<UserVo>> queryUserByPage(UserVo userVo, Page page) {
+    public CommenResp<PageInfo<UserVo>> queryUserByPage(@RequestBody UserVo userVo,@RequestBody Page page) {
         CommenResp<PageInfo<UserVo>> resp = new CommenResp<PageInfo<UserVo>>();
         try{
             PageInfo<UserVo> usesr = userService.selectUserByPage(userVo,page);
@@ -130,6 +138,71 @@ public class UserController {
             e.printStackTrace();
             resp.setType("E");
             resp.setMsg("网络异常");
+        }
+        return resp;
+    }
+
+    /**
+     * 新增关注用户
+     * @param userRelationVo
+     * @return
+     */
+    @RequestMapping(value = "/addAttention",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp addAttention(@RequestBody UserRelationVo userRelationVo) {
+        CommenResp resp = new CommenResp();
+        try{
+            userService.addAttention(userRelationVo);
+        }catch(Exception e){
+            e.printStackTrace();
+            resp.setType("E");
+            if(e instanceof ServiceException){
+                resp.setMsg(e.getMessage());
+            }else{
+                resp.setMsg("网络异常");
+            }
+        }
+        return resp;
+    }
+    /**
+     * 新增黑名单用户
+     * @param userRelationVo
+     * @return
+     */
+    @RequestMapping(value = "/addBlack",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp addBlack(@RequestBody UserRelationVo userRelationVo) {
+        CommenResp resp = new CommenResp();
+        try{
+            userService.addBlack(userRelationVo);
+        }catch(Exception e){
+            e.printStackTrace();
+            resp.setType("E");
+            if(e instanceof ServiceException){
+                resp.setMsg(e.getMessage());
+            }else{
+                resp.setMsg("网络异常");
+            }
+        }
+        return resp;
+    }
+
+    /**
+     * 新增黑名单用户
+     * @param userRelationVo
+     * @return
+     */
+    @RequestMapping(value = "/addReport",method = RequestMethod.POST,produces = "application/json")
+    public CommenResp addReport(@RequestBody UserRelationVo userRelationVo) {
+        CommenResp resp = new CommenResp();
+        try{
+            userService.addReport(userRelationVo);
+        }catch(Exception e){
+            e.printStackTrace();
+            resp.setType("E");
+            if(e instanceof ServiceException){
+                resp.setMsg(e.getMessage());
+            }else{
+                resp.setMsg("网络异常");
+            }
         }
         return resp;
     }

@@ -2,6 +2,10 @@ package haihuang.utils.serviceUtils;
 
 import com.github.pagehelper.PageInfo;
 import haihuang.bean.HhUser;
+import haihuang.bean.HhUserAttention;
+import haihuang.bean.HhUserBlack;
+import haihuang.bean.HhUserReport;
+import haihuang.vo.UserRelationVo;
 import haihuang.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 
@@ -45,17 +49,32 @@ public class UserUtil implements Serializable {
         return list;
     }
 
+    public static HhUserAttention createHhUserAttentionByVo(UserRelationVo userRelationVo) {
+        if(null == userRelationVo){
+            return null;
+        }
+        HhUserAttention user = new HhUserAttention();
+        BeanUtils.copyProperties(userRelationVo,user);
+        return user;
+    }
 
+    public static HhUserBlack createHhUserBlackByVo(UserRelationVo userRelationVo) {
+        if(null == userRelationVo){
+            return null;
+        }
+        HhUserBlack user = new HhUserBlack();
+        BeanUtils.copyProperties(userRelationVo,user);
+        return user;
+    }
 
-
-
-
-
-
-
-
-
-
+    public static HhUserReport createHhUserReportByVo(UserRelationVo userRelationVo) {
+        if(null == userRelationVo){
+            return null;
+        }
+        HhUserReport user = new HhUserReport();
+        BeanUtils.copyProperties(userRelationVo,user);
+        return user;
+    }
 
 
 //        list.setPageNum(userResp.getPageNum());

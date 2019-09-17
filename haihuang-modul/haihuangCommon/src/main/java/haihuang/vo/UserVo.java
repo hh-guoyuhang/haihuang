@@ -76,6 +76,8 @@ public class UserVo implements Serializable {
 
     private Date createTime;//创建时间
 
+    private String orderByWhat;//通过什么字段排序
+
     public Long getId() {
         return id;
     }
@@ -91,7 +93,6 @@ public class UserVo implements Serializable {
     public void setRealName(String realName) {
         this.realName = realName == null ? null : realName.trim();
     }
-
 
     public String getMobilePhone() {
         return mobilePhone;
@@ -363,5 +364,13 @@ public class UserVo implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getOrderByWhat() {
+        return orderByWhat;
+    }
+
+    public void setOrderByWhat(String orderByWhat) {
+        this.orderByWhat = orderByWhat;
     }
 }
